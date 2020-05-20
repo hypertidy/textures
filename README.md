@@ -7,6 +7,8 @@
 
 <!-- badges: end -->
 
+No code here yet, just ideas to flesh out. :)
+
 The goal of textures is to utilize texture mapping in rgl to work with
 images in different coordinate systems and mapped onto arbitrary shapes.
 
@@ -24,6 +26,7 @@ example which shows you how to map an image onto a quad (4 coordinates)
 from a PNG file.
 
 ``` r
+## can't run this in rmarkdown as snapshot doesn't work
 library(textures)
 
 
@@ -36,15 +39,23 @@ quad0$material$texture <- tfile
 quad0$vb[1L,] <- scales::rescale(quad0$vb[1,], to = ga_topo$extent[c("xmin", "xmax")])
 quad0$vb[2L,] <- scales::rescale(quad0$vb[2L,], to = ga_topo$extent[c("ymin", "ymax")])
 
+
 rgl::open3d()
-#> wgl 
-#>   1
+rgl::par3d(windowRect = c(0, 0, 1024, 1024))
 rgl::plot3d(quad0, specular = "black"); rgl::view3d(phi = 0, interactive = FALSE)
 dir.create("man/figures", showWarnings = FALSE)
-rgl::snapshot3d("man/figures/readme_ga000.png", )
+rgl::rgl.bringtotop()
+rgl::snapshot3d("man/figures/readme_ga000.png")
 ```
 
-![texture map on aquad](man/figures/readme_ga000.png)
+![texture map on a quad](man/figures/readme_ga000.png)
+
+## Re-map projections
+
+Create a generalized surface in arbitrary map projection and remap the
+image losslessly …
+
+TODO
 
 -----
 
