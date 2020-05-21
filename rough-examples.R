@@ -6,6 +6,7 @@ laea <- "+proj=laea +lon_0=120 +lat_0=-28"
 aus <- subset(simpleworld, sovereignt == "Australia")
 aus_merc <- sp::spTransform(aus, ga_topo$crs)
 aus_wire <- copy_down(DEL0(aus_merc), 1000)
+
 # 1. absolutely simplest native coordinate texture
 # -----------------------------------------------
 tfile <- tempfile(fileext = ".png")
@@ -55,7 +56,7 @@ set_scene()
 
 tfile <- tempfile(fileext = ".png")
 png::writePNG(ga_topo$img/255, tfile)
-plot3d(quad0 <- quad(texfile = tfile, depth = 5, unmesh = TRUE))
+plot3d(quad0 <- quad(texfile = tfile, depth = 7, unmesh = TRUE))
 
 class(quad0)
 jitter_mesh <- function(x, factor = 1, amount = NULL) {
@@ -68,7 +69,8 @@ x
 }
 clear3d()
 plot3d(jitter_mesh(quad0, c(1, 1, 0.01)))
-aspect3d(1, 1, 0.005)
+aspect3d(1, 1, 0.001)
+
 
 
 

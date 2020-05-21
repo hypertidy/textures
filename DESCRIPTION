@@ -19,3 +19,5 @@ Imports:
     rgl
 Depends: 
     R (>= 3.2.0)
+Suggests: 
+    testthat

@@ -104,11 +104,13 @@ par3d(windowRect  = c(0, 0, 1024, 1024))
 
 *see ./rough-examples.R* WIP
 
-  - Illustrate folly of low-density primitives for reprojection
-  - Explore the use of primitive shapes for placing image fragments
-    arbitrarily
-  - Create a generalized surface in arbitrary map projection and remap
-    the image losslessly
+  - **rough-examples\#1**: See Mercator map above.
+  - **rough-examples\#2.**: Illustrate folly of low-density primitives
+    for reprojection
+  - **rough-examples\#3.**: Create a generalized surface in arbitrary
+    map projection and remap the image losslessly
+  - **rough-examples\#4.**: Explore the use of primitive shapes for
+    placing image fragments arbitrarily
 
 -----
 
