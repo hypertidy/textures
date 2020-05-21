@@ -1,3 +1,4 @@
 test_that("rough examples work", {
-  expect_warning(source("../../rough-examples.R"))
+  src <- system.file("rough-examples/rough-examples.R", package = "textures")
+  expect_warning(source(src))
 })
