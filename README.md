@@ -28,21 +28,18 @@ from a PNG file.
 ``` r
 ## can't run this in rmarkdown as snapshot doesn't work
 library(textures)
-
-
-suppressWarnings(quad0 <- anglr::as.mesh3d(matrix(0, 1))) ## to be fixed
-quad0$texcoords <- quad0$vb[1:2, ]
 tfile <- tempfile()
 png::writePNG(ga_topo$img/255, tfile)
-quad0$material$texture <- tfile
+
+quad0 <- quad(texfile = tfile)
 
 quad0$vb[1L,] <- scales::rescale(quad0$vb[1,], to = ga_topo$extent[c("xmin", "xmax")])
 quad0$vb[2L,] <- scales::rescale(quad0$vb[2L,], to = ga_topo$extent[c("ymin", "ymax")])
 
 
 rgl::open3d()
-rgl::par3d(windowRect = c(0, 0, 1024, 1024))
-rgl::plot3d(quad0, specular = "black"); rgl::view3d(phi = 0, interactive = FALSE)
+rgl::plot3d(quad0, specular = "black")
+set_scene()
 dir.create("man/figures", showWarnings = FALSE)
 rgl::rgl.bringtotop()
 rgl::snapshot3d("man/figures/readme_ga000.png")

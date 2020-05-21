@@ -1,15 +1,6 @@
 library(textures)
 library(rgl)
-set_scene <- function(interactive = FALSE, zoom = 0.5) {
-  rgl::par3d(windowRect = c(0, 0, 1024, 1024))
 
-  rgl::view3d(phi = 0, interactive = interactive, zoom = zoom)
-  rgl.pop(type = "lights")
-  light3d(phi = -45)
-  aspect3d("iso")
-  rgl::rgl.bringtotop()
-
-}
 laea <- "+proj=laea +lon_0=120 +lat_0=-28"
 ## a polygon map we can keep our bearings with
 aus <- subset(simpleworld, sovereignt == "Australia")
