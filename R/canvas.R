@@ -9,7 +9,7 @@
 #' @param tex logical, whether to create `texcoords`
 #' @param texfile if `tex` is `TRUE`, an optional file name (a temporary path is created, must be PNG if supplied)
 #'
-#' @return
+#' @return mesh3d with quads and material texture settings as per inputs
 #' @export
 #'
 #' @examples

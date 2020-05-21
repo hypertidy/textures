@@ -2,3 +2,8 @@
 
 export(quad)
 export(set_scene)
+importFrom(rgl,aspect3d)
+importFrom(rgl,par3d)
+importFrom(rgl,pop3d)
+importFrom(rgl,rgl.bringtotop)
+importFrom(rgl,view3d)

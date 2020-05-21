@@ -17,7 +17,16 @@ nothing
 \description{
 Quick defaults for rgl static plot
 }
+\details{
+This function sets the size of the window to 1024x1024, sets the view position
+at directly vertical \verb{phi = 0, theta = 0}, makes the view non-interactive
+(zoom is enabled, but no pivot or pan). It turns off the lights and puts a
+new light in front of the viewer (to avoid shiny glare), sets the aspect
+ratio to 'iso' ("fill the box"), and attempts to 'bringtotop', but I think that
+has to happen interactively with \code{rgl::rgl.bringtotop()} (especially for
+animating or snapshotting scenes to file).
+}
 \examples{
-## see README and in-dev examples
-plot3d(rnorm(10), rnorm(10), rnorm(1)); set_scene()
+## see README and in-dev examples in rough-examples.R
+rgl::plot3d(rnorm(10), rnorm(10), rnorm(1)); set_scene()
 }

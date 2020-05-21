@@ -14,7 +14,7 @@ quad(depth = 0, tex = TRUE, texfile = NULL)
 \item{texfile}{if \code{tex} is \code{TRUE}, an optional file name (a temporary path is created, must be PNG if supplied)}
 }
 \value{
-
+mesh3d with quads and material texture settings as per inputs
 }
 \description{
 Create a simple quad mesh3d object
