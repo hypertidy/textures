@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 # textures
 
 <!-- badges: start -->
+[![R build status](https://github.com/hypertidy/textures/workflows/R-CMD-check/badge.svg)](https://github.com/hypertidy/textures/actions)
 <!-- badges: end -->
 
 

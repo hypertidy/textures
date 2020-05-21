@@ -6,3 +6,4 @@
 ^README\.Rmd$
 ^CODE_OF_CONDUCT\.md$
 ^rough-examples.R$
+^\.github$
