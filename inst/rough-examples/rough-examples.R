@@ -53,7 +53,7 @@ set_scene()
 
 
 # 4. break the mesh and explode a bit
-
+# -------------------------------------------------------
 tfile <- tempfile(fileext = ".png")
 png::writePNG(ga_topo$img/255, tfile)
 plot3d(quad0 <- quad(texfile = tfile, depth = 7, unmesh = TRUE))
@@ -68,8 +68,33 @@ jitter_mesh <- function(x, factor = 1, amount = NULL) {
 x
 }
 clear3d()
-plot3d(jitter_mesh(quad0, c(1, 1, 0.01)))
+plot3d(jitter_mesh(quad0, c(2, 2, 1)))
 aspect3d(1, 1, 0.001)
+
+
+# 5. what about elevating them by average elevation, then jitter that
+# -------------------------------------------------------
+tfile <- tempfile(fileext = ".png")
+png::writePNG(ga_topo$img/255, tfile)
+quad0 <- quad(texfile = tfile, depth = 8, unmesh = TRUE)
+
+library(anglr)
+
+quad0$vb[1L,] <- scales::rescale(quad0$vb[1,], to = ga_topo$extent[c("xmin", "xmax")])
+quad0$vb[2L,] <- scales::rescale(quad0$vb[2L,], to = ga_topo$extent[c("ymin", "ymax")])
+
+quad0$vb[3, ] <- raster::extract(gebco, reproj::reproj(t(quad0$vb[1:2, ]), source = ga_topo$crs,
+                                                      target = "+proj=longlat")[,1:2])
+
+
+quad0$vb[3, ] <- rep(colMeans(matrix(quad0$vb[3, quad0$ib], 4)), each  = 4L)  ## a bit tenuous
+quad0$vb[3, quad0$vb[3,] < -200] <- NA
+
+plot3d(jitter_mesh(quad0))
+plot3d(quad0)
+aspect3d(1, 1, .1)
+
+
 
 
 
