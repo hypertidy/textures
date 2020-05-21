@@ -51,3 +51,27 @@ wire3d(reproj::reproj(aus_wire, laea), add = T)
 set_scene()
 
 
+# 4. break the mesh and explode a bit
+
+tfile <- tempfile(fileext = ".png")
+png::writePNG(ga_topo$img/255, tfile)
+plot3d(quad0 <- quad(texfile = tfile, depth = 5, unmesh = TRUE))
+
+class(quad0)
+jitter_mesh <- function(x, factor = 1, amount = NULL) {
+  factor <- rep(factor, length.out = 3)
+  amount <- rep(amount, length.out = 3)
+  x$vb[1, ] <- jitter(x$vb[1, ], factor = factor[1], amount = amount[1])
+  x$vb[2, ] <- jitter(x$vb[2, ], factor = factor[2], amount = amount[2])
+  x$vb[3, ] <- jitter(x$vb[3, ], factor = factor[3], amount = amount[3])
+x
+}
+clear3d()
+plot3d(jitter_mesh(quad0, c(1, 1, 0.01)))
+aspect3d(1, 1, 0.005)
+
+
+
+
+
+

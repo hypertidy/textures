@@ -4,7 +4,7 @@
 \alias{quad}
 \title{Quad canvas}
 \usage{
-quad(depth = 0, tex = TRUE, texfile = NULL)
+quad(depth = 0, tex = TRUE, texfile = NULL, unmesh = FALSE)
 }
 \arguments{
 \item{depth}{depth to subdivide canvas by (default is \code{0} which gives one quad, see Details)}
@@ -12,6 +12,8 @@ quad(depth = 0, tex = TRUE, texfile = NULL)
 \item{tex}{logical, whether to create \code{texcoords}}
 
 \item{texfile}{if \code{tex} is \code{TRUE}, an optional file name (a temporary path is created, must be PNG if supplied)}
+
+\item{unmesh}{if \code{TRUE} all vertices are expanded to every coordinate instance (see \code{\link[=break_mesh]{break_mesh()}})}
 }
 \value{
 mesh3d with quads and material texture settings as per inputs
