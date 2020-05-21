@@ -4,12 +4,24 @@
 \alias{set_scene}
 \title{rgl defaults}
 \usage{
-set_scene(interactive = FALSE, zoom = 0.5)
+set_scene(
+  interactive = FALSE,
+  zoom = 0.5,
+  phi = 0,
+  theta = 0,
+  light_phi = -45,
+  light_theta = 0
+)
 }
 \arguments{
 \item{interactive}{mouse interactive plot, default \code{FALSE}}
 
 \item{zoom}{zoom for \link[rgl:view3d]{rgl::view3d} default \code{0.5} which is closer than rgl 1}
+
+\item{phi, theta}{polar coordinates, passed to \code{\link[rgl:view3d]{rgl::view3d()}}}
+
+\item{light_phi, light_theta}{polar coordinates, passed to \code{\link[rgl:light3d]{rgl::light3d()}} as
+\code{phi} and \code{theta} respectively}
 }
 \value{
 nothing
@@ -25,6 +37,13 @@ new light in front of the viewer (to avoid shiny glare), sets the aspect
 ratio to 'iso' ("fill the box"), and attempts to 'bringtotop', but I think that
 has to happen interactively with \code{rgl::rgl.bringtotop()} (especially for
 animating or snapshotting scenes to file).
+
+\code{phi} and \code{theta} use \code{0} and \code{0} respectively, phi is different from
+rgl's default in order to look straight down on the quad (along the z axis)
+
+\code{light_phi} and \code{light_theta} use \code{-45} and \code{0} respectively, phi is different
+from rg's default to put the light source forwards (y+) from the viewer when
+looking straight down
 }
 \examples{
 ## see README and in-dev examples in rough-examples.R
