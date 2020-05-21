@@ -1,13 +1,14 @@
 Package: textures
-Title: Plot 3D textures as 2D Graphics (Kinda)
-Version: 0.0.0.9000
+Title: Plot 3D Textures as 2D Graphics (Kinda)
+Version: 0.0.0
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person(given = "Michael D.",
+           family = "Sumner",
            role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+           email = "mdsumner@gmail.com",
+           comment = c(ORCID = "0000-0002-2471-7511"))
+Description: Illustrate the use of utilize texture mapping in rgl to work with 
+ images in different coordinate systems and mapped onto arbitrary shapes.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
@@ -17,4 +18,4 @@ Imports:
     silicate,
     rgl
 Depends: 
-    R (>= 2.10)
+    R (>= 3.2.0)

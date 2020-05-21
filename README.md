@@ -38,21 +38,29 @@ pivot (it’s disabled).
 
 Maps an image onto a quad from a PNG file.
 
+*NOTE: can’t run this in rmarkdown or snapshot doesn’t work.*
+
 ``` r
-## can't run this in rmarkdown as snapshot doesn't work
 library(textures)
-tfile <- tempfile()
+## create a temporary file and write an image to it
+tfile <- tempfile(fileext = ".png")
 png::writePNG(ga_topo$img/255, tfile)
 
+## create a quad *canvas*, a single 4-corner shape floating in 3D
+## (and use the PNG file as the material to texture that canvas)
 quad0 <- quad(texfile = tfile)
 
+## set the geography of the canvas, this is trivial because we have a rectangular
+## scale that applies directly as a scaling of x and y
 quad0$vb[1L,] <- scales::rescale(quad0$vb[1,], to = ga_topo$extent[c("xmin", "xmax")])
 quad0$vb[2L,] <- scales::rescale(quad0$vb[2L,], to = ga_topo$extent[c("ymin", "ymax")])
 
-
+## plot it in 3D 
 rgl::open3d()
 rgl::plot3d(quad0, specular = "black")
-set_scene()
+set_scene()  ## this sets the plot up to appear like a 2D image
+
+## take a snapshot to appear in this README, see below
 dir.create("man/figures", showWarnings = FALSE)
 rgl::rgl.bringtotop()
 rgl::snapshot3d("man/figures/readme_ga000.png")
@@ -65,7 +73,7 @@ rgl::snapshot3d("man/figures/readme_ga000.png")
 Create a generalized surface in arbitrary map projection and remap the
 image losslessly …
 
-TODO
+*see ./rough-examples.R* WIP
 
 -----
 
