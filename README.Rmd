@@ -19,24 +19,33 @@ knitr::opts_chunk$set(
 <!-- badges: end -->
 
 
-No code here yet, just ideas to flesh out. :)
-
 
 The goal of textures is to utilize texture mapping in rgl to work with images in different coordinate systems and mapped onto arbitrary shapes. 
 
-WIP
+There's a couple of functions in the package, with ongoing work to explore examples and align them 
+to package functionality. 
 
+The goal is for this package to illustrate texture mapping capability in rgl with *core techniques familiar to R users*, and with minimal *resort to specialist code*. When specialist code is required
+it will be brought out explicitly and explained in a single-step. 
+
+
+Very WIP
 
 ## Installation
 
-Not yet. 
+Only for dev interest. 
+
+```R
+## install.packages("remotes")
+remotes::install_github("hypertidy/textures")
+```
 
 
 ## Example
 
-Not much yet, just a Mercator raster on a single quad. Zoom in and out but no translate (yet) or pivot (it's disabled). 
-This is a basi
-c example which shows you how to map an image onto a quad (4 coordinates) from a PNG file. 
+A Mercator raster on a single quad. Zoom in and out but no translate or pivot (it's disabled). 
+
+Maps an image onto a quad from a PNG file. 
 
 
 ```{r example, eval = FALSE}

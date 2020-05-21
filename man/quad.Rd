@@ -21,7 +21,7 @@ Create a simple quad mesh3d object
 }
 \details{
 The \code{depth} of subdivision is passed directly to \code{\link[rgl:subdivision3d]{rgl::subdivision3d()}} and
-by default is \code{0} (no subdivion is done). This means the number of quads is
+by default is \code{0} (no subdivison is done). This means the number of quads is
 \code{2^depth} - so be careful!
 }
 \examples{

@@ -13,7 +13,8 @@ library(raster)
 ga_topo <- list(img = raster::as.array(img),
      extent = c(xmin = xmin(img), xmax = xmax(img), ymin = ymin(img), ymax = ymax(img)),
      crs = crsmeta::crs_proj(img))
-
+download.file("http://gaservices.ga.gov.au/site_7/rest/services/Topographic_Base_Map_WM/MapServer",
+              "data-raw/ga_topobasemap.html")
 usethis::use_data(ga_topo, overwrite = TRUE)
 
 
