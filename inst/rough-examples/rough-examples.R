@@ -39,7 +39,7 @@ set_scene()
 # 3. densify the canvas prior to reprojection (obviously)
 # -------------------------------------------------------
 ## now let's subdivide the canvas
-quad0 <- quad(texfile = tfile, depth = 6)
+quad0 <- quad(texfile = tfile, depth = c(256, 256))
 
 quad0$vb[1L,] <- scales::rescale(quad0$vb[1,], to = ga_topo$extent[c("xmin", "xmax")])
 quad0$vb[2L,] <- scales::rescale(quad0$vb[2L,], to = ga_topo$extent[c("ymin", "ymax")])
@@ -52,11 +52,14 @@ wire3d(reproj::reproj(aus_wire, laea), add = T)
 set_scene()
 
 
+
+view3d(interactive = T)
 # 4. break the mesh and explode a bit
 # -------------------------------------------------------
 tfile <- tempfile(fileext = ".png")
 png::writePNG(ga_topo$img/255, tfile)
-plot3d(quad0 <- quad(texfile = tfile, depth = 7, unmesh = TRUE))
+plot3d(quad0 <- quad(texfile = tfile, depth = dim(ga_topo$img)[1:2]/4,  ## calm down a bit
+                     unmesh = TRUE))
 
 class(quad0)
 jitter_mesh <- function(x, factor = 1, amount = NULL) {
@@ -76,7 +79,7 @@ aspect3d(1, 1, 0.001)
 # -------------------------------------------------------
 tfile <- tempfile(fileext = ".png")
 png::writePNG(ga_topo$img/255, tfile)
-quad0 <- quad(texfile = tfile, depth = 8, unmesh = TRUE)
+quad0 <- quad(texfile = tfile, depth = c(64, 64), unmesh = TRUE)
 
 library(anglr)
 
@@ -95,8 +98,13 @@ plot3d(quad0)
 aspect3d(1, 1, .1)
 
 
-
-
+quad0 <- quad()
+tri <- quad0
+tri$it <- anglr:::.quad2tri(tri$ib)
+tri$ib <- NULL
+a <- vcgBary(tri)
+wire3d(tri)
+points3d(a)
 
 
 

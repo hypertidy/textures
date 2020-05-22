@@ -17,19 +17,23 @@
 #' @examples
 #' qm <- quad()
 quad <- function(depth = 0, tex = TRUE, texfile = NULL, unmesh = FALSE) {
-  x <- rgl::qmesh3d(rbind(x = c(0, 1, 0, 1),
+  ## hidden feature if depth has length 2
+  if (length(depth) == 2L) {
+    x <- quad_(depth[1L], depth[2L])
+  } else {
+    x <- rgl::qmesh3d(rbind(x = c(0, 1, 0, 1),
                      y = c(0, 0, 1, 1),
                      z = c(0, 0, 0, 0),
                      h = c(1, 1, 1, 1)),
                matrix(c(1L, 2L, 4L, 3L), nrow = 4L), material = list(color = "#FFFFFFFF"))
-
+}
  if (tex) {
     x$texcoords <- x$vb[1:2, ]
     if (is.null(texfile)) texfile <- tempfile(fileext = ".png")
     x$material$texture <- texfile
 
   }
-  x <- rgl::subdivision3d(x, depth = depth, normalize = TRUE, deform = FALSE)
+  if (length(depth) == 1L) x <- rgl::subdivision3d(x, depth = depth, normalize = TRUE, deform = FALSE)
   if (unmesh) {
     x <- break_mesh(x)
   }
@@ -51,8 +55,11 @@ ib_index <- function(nx = 1, ny = nx) {
   matrix(ind0, nrow = 4)
 }
 quad_ <- function(nx = 1, ny = nx) {
-  xy <- cbind(rep(seq(0, 1, length.out = nx + 1L), each = ny + 1),
-              seq(0, 1, length.out = ny + 1L ))
+  xy <- cbind(x = rep(seq(0, 1, length.out = ny + 1L), each = nx + 1),
+              y = seq(0, 1, length.out = nx + 1L ))
+
   rgl::qmesh3d(rbind(t(xy), z = 0, h = 1),
-               t(ib_index(nx, ny)))
+                    ib_index(nx, ny)[c(1, 4, 3, 2), ], ## fakey anti-clockwise, with positive-y (for now)
+               material = list(color = "#FFFFFFFF"))
+
 }
