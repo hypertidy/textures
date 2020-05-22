@@ -35,3 +35,24 @@ quad <- function(depth = 0, tex = TRUE, texfile = NULL, unmesh = FALSE) {
   }
   x
 }
+
+## edge-pairs
+.pr <- function(x) {
+  cbind(x[-length(x)], x[-1])
+}
+## quad index in [1:nx,1:ny] - not compatible with the version above yet
+ib_index <- function(nx = 1, ny = nx) {
+  nc1 <- nx + 1L
+  nr1 <- ny + 1L
+  aa <- t(.pr(seq(nc1)))
+  ind <- matrix(c(rbind(aa, aa[2:1, , drop = FALSE])) + c(0, 0, nc1, nc1), 4)
+  ind0 <- as.integer(as.vector(ind) +
+                       rep(seq(0, length = ny, by = nc1), each = 4 * nx))
+  matrix(ind0, nrow = 4)
+}
+quad_ <- function(nx = 1, ny = nx) {
+  xy <- cbind(rep(seq(0, 1, length.out = nx + 1L), each = ny + 1),
+              seq(0, 1, length.out = ny + 1L ))
+  rgl::qmesh3d(rbind(t(xy), z = 0, h = 1),
+               t(ib_index(nx, ny)))
+}
