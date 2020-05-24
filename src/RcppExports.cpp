@@ -17,9 +17,22 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// quad_vertex
+NumericVector quad_vertex(IntegerVector nx, IntegerVector ny);
+RcppExport SEXP _textures_quad_vertex(SEXP nxSEXP, SEXP nySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerVector >::type nx(nxSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type ny(nySEXP);
+    rcpp_result_gen = Rcpp::wrap(quad_vertex(nx, ny));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_textures_quad_index", (DL_FUNC) &_textures_quad_index, 2},
+    {"_textures_quad_vertex", (DL_FUNC) &_textures_quad_vertex, 2},
     {NULL, NULL, 0}
 };
 

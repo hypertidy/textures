@@ -62,7 +62,7 @@ quad_texture <- function(dim = 1L, texture = "") {
 
 }
 ## quad index in [1:nx,1:ny] - not compatible with the version above yet
-ib_index <- function(nx = 1, ny = nx) {
+ib_index <- function(nx = 1, ny = nx, ydown = FALSE) {
   nc1 <- nx + 1L
   nr1 <- ny + 1L
   aa <- t(.pr(seq_len(nc1)))
@@ -70,9 +70,16 @@ ib_index <- function(nx = 1, ny = nx) {
   ind <- matrix(rbind(aa, aa[2:1, , drop = FALSE] + nc1), 4L)
   (ind0 <- as.integer(as.vector(ind) +
                        rep(seq(0, length = ny, by = nc1), each = 4L * nx)))
-  matrix(ind0, nrow = 4L)
+  out <- matrix(ind0, nrow = 4L)
+  if (ydown) {
+    ## we have to reverse the order so they are anti-clockwise
+    ## can vis this with material3d(back = "lines")
+    out <- out[4:1, , drop = FALSE]
+  }
+  out
 }
 vb_vertex <- function(nx = 1L, ny = nx, ydown = FALSE) {
+#browser()
   ## here we could reverse y and be raster-aligned?
   ymin <- 0
   ymax <- 1
@@ -85,11 +92,11 @@ vb_vertex <- function(nx = 1L, ny = nx, ydown = FALSE) {
 }
 quad_ <- function(nx = 1, ny = nx, ydown = FALSE) {
   # xy <- cbind(x = rep(seq(0, 1, length.out = ny + 1L), each = nx + 1),
-  #             y = seq(0, 1, length.out = nx + 1L ))
+  #             y = seq(0, 1, length.out = nx + ,1L ))
 
   xy <- vb_vertex(nx, ny, ydown = ydown)
   rgl::qmesh3d(rbind(t(xy), z = 0, h = 1),
-                    ib_index(nx, ny),
+                    ib_index(nx, ny, ydown = ydown),
                material = list(color = "#FFFFFFFF"))
 
 }

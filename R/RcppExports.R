@@ -5,3 +5,7 @@ quad_index <- function(nx, ny) {
     .Call(`_textures_quad_index`, nx, ny)
 }
 
+quad_vertex <- function(nx, ny) {
+    .Call(`_textures_quad_vertex`, nx, ny)
+}
+
