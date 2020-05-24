@@ -47,7 +47,7 @@ png::writePNG(ga_topo$img/255, tfile)
 
 ## create a quad *canvas*, a single 4-corner shape floating in 3D
 ## (and use the PNG file as the material to texture that canvas)
-quad0 <- quad(texfile = tfile)
+quad0 <- quad_texture(c(1, 1), texture = tfile)
 
 ## set the geography of the canvas, this is trivial because we have a rectangular
 ## scale that applies directly as a scaling of x and y
@@ -76,7 +76,7 @@ ggsave(tfile, g)
 
 
 library(textures)
-quad0 <- quad(texfile = tfile, depth = 7)
+quad0 <- quad_texture(dim = c(92, 102), texture = tfile)
 
 ex <- -20
 ## flip it (fixme later)
@@ -89,7 +89,8 @@ quad0$vb[2L,] <- scales::rescale(quad0$vb[2L,], to = c(-1, 1) * ex)
 f <- function(x, y) { r <- sqrt(x^2+y^2); 10 * sin(r)/r }  ## ?persp
 quad0$vb[3L, ] <- f(quad0$vb[1L,], quad0$vb[2L,])
 
-quad0 <- addNormals(quad0)  ## we are still in rgl scope, so everything is available
+## not working atm ...
+#quad0 <- addNormals(quad0)  ## we are still in rgl scope, so everything is available
 ## plot it in 3D 
 rgl::open3d()
 rgl::plot3d(quad0, specular = "black")
