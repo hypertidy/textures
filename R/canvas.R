@@ -43,23 +43,35 @@ quad <- function(depth = 0, tex = TRUE, texfile = NULL, unmesh = FALSE) {
 ## edge-pairs
 .pr <- function(x) {
   cbind(x[-length(x)], x[-1])
+
 }
 ## quad index in [1:nx,1:ny] - not compatible with the version above yet
 ib_index <- function(nx = 1, ny = nx) {
   nc1 <- nx + 1L
   nr1 <- ny + 1L
-  aa <- t(.pr(seq(nc1)))
-  ind <- matrix(c(rbind(aa, aa[2:1, , drop = FALSE])) + c(0, 0, nc1, nc1), 4)
-  ind0 <- as.integer(as.vector(ind) +
-                       rep(seq(0, length = ny, by = nc1), each = 4 * nx))
-  matrix(ind0, nrow = 4)
+  aa <- t(.pr(seq_len(nc1)))
+  #(ind <- matrix(rbind(aa[1L, ], aa + nc1, aa[2L, ]), 4L))
+  ind <- matrix(rbind(aa, aa[2:1, , drop = FALSE] + nc1), 4L)
+  (ind0 <- as.integer(as.vector(ind) +
+                       rep(seq(0, length = ny, by = nc1), each = 4L * nx)))
+  matrix(ind0, nrow = 4L)
 }
 quad_ <- function(nx = 1, ny = nx) {
-  xy <- cbind(x = rep(seq(0, 1, length.out = ny + 1L), each = nx + 1),
-              y = seq(0, 1, length.out = nx + 1L ))
+  # xy <- cbind(x = rep(seq(0, 1, length.out = ny + 1L), each = nx + 1),
+  #             y = seq(0, 1, length.out = nx + 1L ))
+
+  xy <- cbind(x = seq(0, 1, length.out = nx + 1L),
+              y = rep(seq(0, 1, length.out = ny + 1L ), each = nx + 1))
+
 
   rgl::qmesh3d(rbind(t(xy), z = 0, h = 1),
-                    ib_index(nx, ny)[c(1, 4, 3, 2), ], ## fakey anti-clockwise, with positive-y (for now)
+                    ib_index(nx, ny),
                material = list(color = "#FFFFFFFF"))
 
+}
+
+plot_qd <- function(nx = 1, ny = 1) {
+  q <- quad_(nx, ny)
+  plot(t(q$vb[1:2, ]), type = "n", asp = 1)
+  text(t(q$vb[1:2, ]), lab = seq_len(ncol(q$vb)))
 }
