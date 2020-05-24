@@ -100,7 +100,12 @@ plot_qd <- function(dim = c(1, 1), ydown = FALSE) {
   plot(t(q$vb[1:2, ]), type = "n", asp = 1)
   graphics::text(t(q$vb[1:2, ]), lab = seq_len(ncol(q$vb)))
 }
-
+plot_qd_cpp <- function(dim = c(1, 1), ydown = FALSE) {
+  ib <- quad_index(dim[1], dim[2])
+  vb <- vb_vertex(dim[1], dim[2])
+  plot(vb, type = "n", asp = 1)
+  graphics::text(vb, lab = seq_len(nrow(vb)))
+}
 
 triangle <- function() {
   rgl::tmesh3d(rbind(x = c(0, 1, 0.5), y = c(0, 0, sin(pi/3)),
