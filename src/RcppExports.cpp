@@ -5,34 +5,34 @@
 
 using namespace Rcpp;
 
-// quad_index
-IntegerVector quad_index(IntegerVector nx, IntegerVector ny);
-RcppExport SEXP _textures_quad_index(SEXP nxSEXP, SEXP nySEXP) {
+// quad_index_cpp
+IntegerVector quad_index_cpp(IntegerVector nx, IntegerVector ny);
+RcppExport SEXP _textures_quad_index_cpp(SEXP nxSEXP, SEXP nySEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< IntegerVector >::type nx(nxSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type ny(nySEXP);
-    rcpp_result_gen = Rcpp::wrap(quad_index(nx, ny));
+    rcpp_result_gen = Rcpp::wrap(quad_index_cpp(nx, ny));
     return rcpp_result_gen;
 END_RCPP
 }
-// quad_vertex
-NumericVector quad_vertex(IntegerVector nx, IntegerVector ny);
-RcppExport SEXP _textures_quad_vertex(SEXP nxSEXP, SEXP nySEXP) {
+// quad_vertex_cpp
+NumericVector quad_vertex_cpp(IntegerVector nx, IntegerVector ny);
+RcppExport SEXP _textures_quad_vertex_cpp(SEXP nxSEXP, SEXP nySEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< IntegerVector >::type nx(nxSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type ny(nySEXP);
-    rcpp_result_gen = Rcpp::wrap(quad_vertex(nx, ny));
+    rcpp_result_gen = Rcpp::wrap(quad_vertex_cpp(nx, ny));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_textures_quad_index", (DL_FUNC) &_textures_quad_index, 2},
-    {"_textures_quad_vertex", (DL_FUNC) &_textures_quad_vertex, 2},
+    {"_textures_quad_index_cpp", (DL_FUNC) &_textures_quad_index_cpp, 2},
+    {"_textures_quad_vertex_cpp", (DL_FUNC) &_textures_quad_vertex_cpp, 2},
     {NULL, NULL, 0}
 };
 

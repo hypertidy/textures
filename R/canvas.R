@@ -79,7 +79,6 @@ ib_index <- function(nx = 1, ny = nx, ydown = FALSE) {
   out
 }
 vb_vertex <- function(nx = 1L, ny = nx, ydown = FALSE) {
-#browser()
   ## here we could reverse y and be raster-aligned?
   ymin <- 0
   ymax <- 1
@@ -91,12 +90,16 @@ vb_vertex <- function(nx = 1L, ny = nx, ydown = FALSE) {
 
 }
 quad_ <- function(nx = 1, ny = nx, ydown = FALSE) {
-  # xy <- cbind(x = rep(seq(0, 1, length.out = ny + 1L), each = nx + 1),
-  #             y = seq(0, 1, length.out = nx + ,1L ))
-
   xy <- vb_vertex(nx, ny, ydown = ydown)
   rgl::qmesh3d(rbind(t(xy), z = 0, h = 1),
                     ib_index(nx, ny, ydown = ydown),
+               material = list(color = "#FFFFFFFF"))
+}
+
+quad_cpp <- function(nx = 1, ny = nx, ydown = FALSE) {
+  xy <- matrix(quad_vertex_cpp(nx, ny), 2L) #, ydown = ydown)
+  rgl::qmesh3d(rbind(xy, z = 0, h = 1),
+               matrix(quad_index_cpp(nx, ny) + 1L, 4L), #, ydown = ydown),
                material = list(color = "#FFFFFFFF"))
 
 }
@@ -113,7 +116,6 @@ plot_qd_cpp <- function(dim = c(1, 1), ydown = FALSE) {
   plot(vb, type = "n", asp = 1)
   graphics::text(vb, lab = seq_len(nrow(vb)))
 }
-
 triangle <- function() {
   rgl::tmesh3d(rbind(x = c(0, 1, 0.5), y = c(0, 0, sin(pi/3)),
                      z = 0, h = 1),

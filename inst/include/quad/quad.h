@@ -48,21 +48,25 @@ IntegerVector quad_ib(IntegerVector nx, IntegerVector ny) {
      double dy = 1/fy;
      double ystart = 0;  // so we can ydown start at 1 and -dy
 
-     double xx [nx[0]];
-     double yy [ny[0]];
+     double xx [nc1];
+     double yy [nr1];
 
-     for (int i = 0; i < nc1; i++) {
+     int i;
+     xx[0] = 0;
+
+     for (i = 0; i < nc1; i++) {
         xx[i] = i * dx;
+      // Rprintf("%f\n", xx[i]);
      }
+
      for (int j = 0; j < nr1; j++) {
         yy[j] = j * dy;
      }
-     // increment columns first
-     for (int i = 0; i < nc1; i++) {
-     for (int j = 0; j < nr1; j++) {
-             // replace with one-time multiply outside loop
-           vertex[count + 0] = xx[i];
-           vertex[count + 1] = yy[j];
+     for (int jj = 0; jj < nr1; jj++) {
+         // increment columns first
+         for (int ii = 0; ii < nc1; ii++) {
+           vertex[count + 0] = xx[ii];
+           vertex[count + 1] = yy[jj];
            count = count + 2;
          }
     }

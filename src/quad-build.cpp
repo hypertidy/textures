@@ -3,13 +3,13 @@
 using namespace Rcpp;
 
 // [[Rcpp::export]]
-IntegerVector quad_index(IntegerVector nx, IntegerVector ny) {
+IntegerVector quad_index_cpp(IntegerVector nx, IntegerVector ny) {
   return quad::quad_ib(nx, ny);
 }
 
 
 // [[Rcpp::export]]
-NumericVector quad_vertex(IntegerVector nx, IntegerVector ny) {
+NumericVector quad_vertex_cpp(IntegerVector nx, IntegerVector ny) {
   return quad::quad_vb(nx, ny);
 }
 
