@@ -72,14 +72,22 @@ ib_index <- function(nx = 1, ny = nx) {
                        rep(seq(0, length = ny, by = nc1), each = 4L * nx)))
   matrix(ind0, nrow = 4L)
 }
-quad_ <- function(nx = 1, ny = nx) {
+vb_vertex <- function(nx = 1L, ny = nx, ydown = FALSE) {
+  ## here we could reverse y and be raster-aligned?
+  ymin <- 0
+  ymax <- 1
+  if (ydown) {
+    ymax <- 0; ymin <- 1
+  }
+  cbind(x = seq(0, 1, length.out = nx + 1L),
+              y = rep(seq(ymin, ymax, length.out = ny + 1L ), each = nx + 1))
+
+}
+quad_ <- function(nx = 1, ny = nx, ydown = FALSE) {
   # xy <- cbind(x = rep(seq(0, 1, length.out = ny + 1L), each = nx + 1),
   #             y = seq(0, 1, length.out = nx + 1L ))
 
-  xy <- cbind(x = seq(0, 1, length.out = nx + 1L),
-              y = rep(seq(0, 1, length.out = ny + 1L ), each = nx + 1))
-
-
+  xy <- vb_vertex(nx, ny, ydown = ydown)
   rgl::qmesh3d(rbind(t(xy), z = 0, h = 1),
                     ib_index(nx, ny),
                material = list(color = "#FFFFFFFF"))
@@ -87,8 +95,15 @@ quad_ <- function(nx = 1, ny = nx) {
 }
 
 #' @importFrom graphics text
-plot_qd <- function(nx = 1, ny = 1) {
-  q <- quad_(nx, ny)
+plot_qd <- function(dim = c(1, 1), ydown = FALSE) {
+  q <- quad_(dim[1], dim[2], ydown = ydown)
   plot(t(q$vb[1:2, ]), type = "n", asp = 1)
   graphics::text(t(q$vb[1:2, ]), lab = seq_len(ncol(q$vb)))
+}
+
+
+triangle <- function() {
+  rgl::tmesh3d(rbind(x = c(0, 1, 0.5), y = c(0, 0, sin(pi/3)),
+                     z = 0, h = 1),
+               matrix(c(1L, 2L, 3L)), meshColor = "faces")
 }
