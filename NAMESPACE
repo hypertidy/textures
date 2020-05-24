@@ -2,8 +2,10 @@
 
 export(break_mesh)
 export(quad)
+export(quad_texture)
 export(set_scene)
 importFrom(Rcpp,sourceCpp)
+importFrom(graphics,text)
 importFrom(rgl,aspect3d)
 importFrom(rgl,par3d)
 importFrom(rgl,pop3d)

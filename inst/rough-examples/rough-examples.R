@@ -11,15 +11,18 @@ aus_wire <- copy_down(DEL0(aus_merc), 1000)
 # -----------------------------------------------
 tfile <- tempfile(fileext = ".png")
 png::writePNG(ga_topo$img/255, tfile)
-quad0 <- quad(texfile = tfile)
+quad0 <- quad_texture(texture = tfile)
+rgl::plot3d(quad0, specular = "black");
+set_scene()
 
+
+
+## this is optional, allows us to overplot in map coordinates
 quad0$vb[1L,] <- scales::rescale(quad0$vb[1,], to = ga_topo$extent[c("xmin", "xmax")])
 quad0$vb[2L,] <- scales::rescale(quad0$vb[2L,], to = ga_topo$extent[c("ymin", "ymax")])
-
-
 rgl::plot3d(quad0, specular = "black");
-wire3d(aus_wire, add = TRUE)
 set_scene()
+wire3d(aus_wire, add = TRUE)
 
 
 # 2. reproject the canvas from the single quad above
@@ -36,10 +39,10 @@ wire3d(reproj::reproj(aus_wire, laea), add = T)
 
 set_scene()
 
-# 3. densify the canvas prior to reprojection (obviously)
+# 3. densify the canvas prior to reproject (obviously)
 # -------------------------------------------------------
 ## now let's subdivide the canvas
-quad0 <- quad(texfile = tfile, depth = c(256, 256))
+quad0 <- quad_texture(c(64, 64), texture = tfile)
 
 quad0$vb[1L,] <- scales::rescale(quad0$vb[1,], to = ga_topo$extent[c("xmin", "xmax")])
 quad0$vb[2L,] <- scales::rescale(quad0$vb[2L,], to = ga_topo$extent[c("ymin", "ymax")])
@@ -56,33 +59,19 @@ set_scene()
 view3d(interactive = T)
 # 4. break the mesh and explode a bit
 # -------------------------------------------------------
-tfile <- tempfile(fileext = ".png")
-png::writePNG(ga_topo$img/255, tfile)
-plot3d(quad0 <- quad(texfile = tfile, depth = dim(ga_topo$img)[1:2]/4,  ## calm down a bit
-                     unmesh = TRUE))
-
-class(quad0)
-jitter_mesh <- function(x, factor = 1, amount = NULL) {
-  factor <- rep(factor, length.out = 3)
-  amount <- rep(amount, length.out = 3)
-  x$vb[1, ] <- jitter(x$vb[1, ], factor = factor[1], amount = amount[1])
-  x$vb[2, ] <- jitter(x$vb[2, ], factor = factor[2], amount = amount[2])
-  x$vb[3, ] <- jitter(x$vb[3, ], factor = factor[3], amount = amount[3])
-x
-}
+bmesh <- break_mesh(quad0)
 clear3d()
-plot3d(jitter_mesh(quad0, c(2, 2, 1)))
-aspect3d(1, 1, 0.001)
+bmesh$vb[3, ] <- jitter(bmesh$vb[3, ])
+plot3d(bmesh)
 
+set_scene(interactive = TRUE)
+aspect3d(1, 1, 0.01)
 
 # 5. what about elevating them by average elevation, then jitter that
 # -------------------------------------------------------
-tfile <- tempfile(fileext = ".png")
-png::writePNG(ga_topo$img/255, tfile)
-quad0 <- quad(texfile = tfile, depth = c(64, 64), unmesh = TRUE)
 
 library(anglr)
-
+quad0 <- break_mesh(quad0)
 quad0$vb[1L,] <- scales::rescale(quad0$vb[1,], to = ga_topo$extent[c("xmin", "xmax")])
 quad0$vb[2L,] <- scales::rescale(quad0$vb[2L,], to = ga_topo$extent[c("ymin", "ymax")])
 
@@ -91,18 +80,19 @@ quad0$vb[3, ] <- raster::extract(gebco, reproj::reproj(t(quad0$vb[1:2, ]), sourc
 
 
 quad0$vb[3, ] <- rep(colMeans(matrix(quad0$vb[3, quad0$ib], 4)), each  = 4L)  ## a bit tenuous
-quad0$vb[3, quad0$vb[3,] < -200] <- NA
+#quad0$vb[3, quad0$vb[3,] < -200] <- NA
 
-plot3d(jitter_mesh(quad0))
+
 plot3d(quad0)
 aspect3d(1, 1, .1)
 
-
-quad0 <- quad()
+# 6. barycentric coords with Rvcg
+# -----------------------------------------------------
 tri <- quad0
 tri$it <- anglr:::.quad2tri(tri$ib)
 tri$ib <- NULL
-a <- vcgBary(tri)
+a <- Rvcg::vcgBary(tri)
+clear3d()
 wire3d(tri)
 points3d(a)
 

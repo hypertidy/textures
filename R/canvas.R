@@ -2,44 +2,60 @@
 #'
 #' Create a simple quad mesh3d object
 #'
-#' The `depth` of subdivision is passed directly to [rgl::subdivision3d()] and
-#' by default is `0` (no subdivison is done). This means the number of quads is
-#' `2^depth` - so be careful!
+#' Use `quad()` to create a mesh3d object with quad indexes to the vertices, this is
+#' defined in the rgl package by [qmesh3d()][rgl::qmesh3d] and has elements
+#' `vb` (the homogeneous coordinates 4xn) and `ib` (the quad index 4xn).
 #'
-#' @param depth depth to subdivide canvas by (default is `0` which gives one quad, see Details)
-#' @param tex logical, whether to create `texcoords`
-#' @param texfile if `tex` is `TRUE`, an optional file name (a temporary path is created, must be PNG if supplied)
+#' Use `quad_texture()` to create a mesh3d object additionally with `texcoords` and
+#' `texture` properties.
+#'
+#' @section Deprecation note:
+#'
+#' Note that an early version used arguments 'depth' (to control [rgl::subdivision3d()]),
+#' 'tex' to indicate that texture should be included, and 'texfile' a link to the texture file path.
+#' Please now use [quad_texture()] for textures, and `dim` argument (length 1 or 2).
+#'
+#' @param dim dimensions of mesh (using [matrix()] and [image()] orientation)
 #' @param unmesh if `TRUE` all vertices are expanded to every coordinate instance (see [break_mesh()])
-#'
+#' @param texture file path to PNG image (may not exist)
+#' @param ... used only to warn about old usage
 #' @return mesh3d with quads and material texture settings as per inputs
 #' @export
-#'
+#' @aliases quad_texture
 #' @examples
 #' qm <- quad()
-quad <- function(depth = 0, tex = TRUE, texfile = NULL, unmesh = FALSE) {
+#' ## orientation is low to high, x then y
+#' qm <- quad(dim(volcano))
+#' scl <- function(x) (x - min(x, na.rm = TRUE))/diff(range(x, na.rm = TRUE))
+#' qm$meshColor <- "faces"
+#' qm$material$color <- hcl.colors(12, "YlOrRd", rev = TRUE)[scl(volcano) * 11 + 1]
+#' rgl::plot3d(qm)
+quad <- function(dim = 1L, unmesh = FALSE, ...) {
+  args <- list(...)
+  if ("depth" %in% names(args)) warning("argument 'depth' is deprecated, use 'dim = '")
+  if ("tex" %in% names(args)) warning("argument 'tex' is deprecated, use 'quad_texture()")
+  if ("texfile" %in% names(args)) warning("argument 'tex' is deprecated, use 'quad_texture()")
+
   ## hidden feature if depth has length 2
-  if (length(depth) == 2L) {
-    x <- quad_(depth[1L], depth[2L])
-  } else {
-    x <- rgl::qmesh3d(rbind(x = c(0, 1, 0, 1),
-                     y = c(0, 0, 1, 1),
-                     z = c(0, 0, 0, 0),
-                     h = c(1, 1, 1, 1)),
-               matrix(c(1L, 2L, 4L, 3L), nrow = 4L), material = list(color = "#FFFFFFFF"))
-}
- if (tex) {
-    x$texcoords <- x$vb[1:2, ]
-    if (is.null(texfile)) texfile <- tempfile(fileext = ".png")
-    x$material$texture <- texfile
-
+  if (length(dim) < 2L) {
+    dim <- c(dim, dim)
   }
-  if (length(depth) == 1L) x <- rgl::subdivision3d(x, depth = depth, normalize = TRUE, deform = FALSE)
-  if (unmesh) {
-    x <- break_mesh(x)
-  }
-  x
+  quad_(dim[1L], dim[2L])
 }
-
+#' @name quad
+#' @export
+quad_texture <- function(dim = 1L, texture = "") {
+  x <- quad(dim)
+  x$texcoords <- x$vb[1:2, ]
+  if (nchar(texture) == 1L) {
+    warning("no texture file given")
+  }
+  if (!file.exists(texture)) {
+    warning("texture file given does not exist")
+  }
+  x$material$texture <- texture
+ x
+}
 ## edge-pairs
 .pr <- function(x) {
   cbind(x[-length(x)], x[-1])
@@ -70,8 +86,9 @@ quad_ <- function(nx = 1, ny = nx) {
 
 }
 
+#' @importFrom graphics text
 plot_qd <- function(nx = 1, ny = 1) {
   q <- quad_(nx, ny)
   plot(t(q$vb[1:2, ]), type = "n", asp = 1)
-  text(t(q$vb[1:2, ]), lab = seq_len(ncol(q$vb)))
+  graphics::text(t(q$vb[1:2, ]), lab = seq_len(ncol(q$vb)))
 }

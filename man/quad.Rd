@@ -2,18 +2,21 @@
 % Please edit documentation in R/canvas.R
 \name{quad}
 \alias{quad}
+\alias{quad_texture}
 \title{Quad canvas}
 \usage{
-quad(depth = 0, tex = TRUE, texfile = NULL, unmesh = FALSE)
+quad(dim = 1L, unmesh = FALSE, ...)
+
+quad_texture(dim = 1L, texture = "")
 }
 \arguments{
-\item{depth}{depth to subdivide canvas by (default is \code{0} which gives one quad, see Details)}
-
-\item{tex}{logical, whether to create \code{texcoords}}
-
-\item{texfile}{if \code{tex} is \code{TRUE}, an optional file name (a temporary path is created, must be PNG if supplied)}
+\item{dim}{dimensions of mesh (using \code{\link[=matrix]{matrix()}} and \code{\link[=image]{image()}} orientation)}
 
 \item{unmesh}{if \code{TRUE} all vertices are expanded to every coordinate instance (see \code{\link[=break_mesh]{break_mesh()}})}
+
+\item{...}{used only to warn about old usage}
+
+\item{texture}{file path to PNG image (may not exist)}
 }
 \value{
 mesh3d with quads and material texture settings as per inputs
@@ -22,10 +25,27 @@ mesh3d with quads and material texture settings as per inputs
 Create a simple quad mesh3d object
 }
 \details{
-The \code{depth} of subdivision is passed directly to \code{\link[rgl:subdivision3d]{rgl::subdivision3d()}} and
-by default is \code{0} (no subdivison is done). This means the number of quads is
-\code{2^depth} - so be careful!
+Use \code{quad()} to create a mesh3d object with quad indexes to the vertices, this is
+defined in the rgl package by \link[rgl:qmesh3d]{qmesh3d()} and has elements
+\code{vb} (the homogeneous coordinates 4xn) and \code{ib} (the quad index 4xn).
+
+Use \code{quad_texture()} to create a mesh3d object additionally with \code{texcoords} and
+\code{texture} properties.
 }
+\section{Deprecation note}{
+
+
+Note that an early version used arguments 'depth' (to control \code{\link[rgl:subdivision3d]{rgl::subdivision3d()}}),
+'tex' to indicate that texture should be included, and 'texfile' a link to the texture file path.
+Please now use \code{\link[=quad_texture]{quad_texture()}} for textures, and \code{dim} argument (length 1 or 2).
+}
+
 \examples{
 qm <- quad()
+## orientation is low to high, x then y
+qm <- quad(dim(volcano))
+scl <- function(x) (x - min(x, na.rm = TRUE))/diff(range(x, na.rm = TRUE))
+qm$meshColor <- "faces"
+qm$material$color <- hcl.colors(12, "YlOrRd", rev = TRUE)[scl(volcano) * 11 + 1]
+rgl::plot3d(qm)
 }
