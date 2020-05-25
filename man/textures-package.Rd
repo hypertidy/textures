@@ -6,8 +6,8 @@
 \alias{textures-package}
 \title{textures: Plot 3D Textures as 2D Graphics (Kinda)}
 \description{
-Illustrate the use of utilize texture mapping in rgl to work with 
- images in different coordinate systems and mapped onto arbitrary shapes.
+Illustrate the use of texture mapping in rgl for depicting images 
+ in graphics or spatial coordinate systems, and mapped onto arbitrary shapes.
 }
 \author{
 \strong{Maintainer}: Michael D. Sumner \email{mdsumner@gmail.com} (\href{https://orcid.org/0000-0002-2471-7511}{ORCID})
