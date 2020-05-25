@@ -4,7 +4,7 @@
 \alias{png_plot3d}
 \title{Plot a PNG bitmap in 3D}
 \usage{
-png_plot3d(pngfile, dim = c(1, 1))
+png_plot3d(pngfile, dim = c(1, 1), height = FALSE)
 }
 \arguments{
 \item{pngfile}{path to a PNG format image file}
