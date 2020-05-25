@@ -21,6 +21,9 @@ Depends:
     R (>= 3.6.0)
 Suggests: 
     testthat,
-    anglr
+    anglr,
+    knitr,
+    rmarkdown
 LinkingTo: 
     Rcpp
+VignetteBuilder: knitr

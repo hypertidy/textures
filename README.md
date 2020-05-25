@@ -17,21 +17,10 @@ techniques familiar to R users*, and with minimal *resort to specialist
 code*. When specialist code is required it will be brought out
 explicitly and explained in a single-step.
 
-Current functions are:
+## Design
 
-  - **quad()** create a simple mesh3d object with 1 or more quad
-    primitives
-  - **quad\_texture()** create a mesh3d object with 1 or more quads, and
-    the texture coordinates and file path to a PNG file
-  - **set\_scene()** a convenience wrapper to rgl scene settings, it
-    makes the scene look “straight-down” and locks pan and tilt so the
-    rgl device like a zoom-in/zoom-out 2D displaye
-  - **break\_mesh()** break the topology of a mesh (so that primitives
-    can be free-floating, not tied to their neigbour’s vertices)
-
-Both **quad()** and **quad\_texture()** return ‘mesh3d’ objects that may
-be plotted direclty with rgls `plot3d()`, `shade3d()`, `persp3d()`,
-`wire3d()`, or `dot3d()`.
+See [design
+vignette](https://github.com/hypertidy/textures/blob/master/vignettes/design.Rmd).
 
 ## Installation
 
