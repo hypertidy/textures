@@ -12,19 +12,30 @@ status](https://github.com/hypertidy/textures/workflows/R-CMD-check/badge.svg)](
 The goal of textures is to utilize texture mapping in rgl to work with
 images in different coordinate systems and mapped onto arbitrary shapes.
 
-There’s a couple of functions in the package, with ongoing work to
-explore examples and align them to package functionality.
+We aim to illustrate texture mapping capability in rgl with *core
+techniques familiar to R users*, and with minimal *resort to specialist
+code*. When specialist code is required it will be brought out
+explicitly and explained in a single-step.
 
-The goal is for this package to illustrate texture mapping capability in
-rgl with *core techniques familiar to R users*, and with minimal *resort
-to specialist code*. When specialist code is required it will be brought
-out explicitly and explained in a single-step.
+Current functions are:
 
-Very WIP
+  - **quad()** create a simple mesh3d object with 1 or more quad
+    primitives
+  - **quad\_texture()** create a mesh3d object with 1 or more quads, and
+    the texture coordinates and file path to a PNG file
+  - **set\_scene()** a convenience wrapper to rgl scene settings, it
+    makes the scene look “straight-down” and locks pan and tilt so the
+    rgl device like a zoom-in/zoom-out 2D displaye
+  - **break\_mesh()** break the topology of a mesh (so that primitives
+    can be free-floating, not tied to their neigbour’s vertices)
+
+Both **quad()** and **quad\_texture()** return ‘mesh3d’ objects that may
+be plotted direclty with rgls `plot3d()`, `shade3d()`, `persp3d()`,
+`wire3d()`, or `dot3d()`.
 
 ## Installation
 
-Only for dev interest.
+Install from github, will require development tools for compiling code.
 
 ``` r
 ## install.packages("remotes")
@@ -34,7 +45,7 @@ remotes::install_github("hypertidy/textures")
 ## Example
 
 A Mercator raster on a single quad. Zoom in and out but no translate or
-pivot (it’s disabled).
+pivot.
 
 Maps an image onto a quad from a PNG file. Run this code and zoom in and
 out.
