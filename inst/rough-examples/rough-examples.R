@@ -52,11 +52,8 @@ quad0$vb[1:2, ] <- t(reproj::reproj(t(quad0$vb[1:2, ]), target = laea,
 ## back in business
 rgl::plot3d(quad0, specular = "black")
 wire3d(reproj::reproj(aus_wire, laea), add = T)
-set_scene()
+set_scene(interactive = T)
 
-
-
-view3d(interactive = T)
 # 4. break the mesh and explode a bit
 # -------------------------------------------------------
 bmesh <- break_mesh(quad0)

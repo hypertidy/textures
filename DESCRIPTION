@@ -1,21 +1,20 @@
 Package: textures
 Title: Plot 3D Textures as 2D Graphics (Kinda)
-Version: 0.0.0.9001
+Version: 0.0.0.9005
 Authors@R: 
     person(given = "Michael D.",
            family = "Sumner",
            role = c("aut", "cre"),
            email = "mdsumner@gmail.com",
            comment = c(ORCID = "0000-0002-2471-7511"))
-Description: Illustrate the use of utilize texture mapping in rgl to work with 
- images in different coordinate systems and mapped onto arbitrary shapes.
+Description: Illustrate the use of texture mapping in rgl for depicting images 
+ in graphics or spatial coordinate systems, and mapped onto arbitrary shapes.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.0
 Imports: 
-    silicate,
     rgl,
     Rcpp
 Depends: 
