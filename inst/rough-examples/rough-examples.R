@@ -97,6 +97,35 @@ wire3d(tri)
 points3d(a)
 
 
+# 7. reprojection
+# ------------------------------------------
+library(rgl)
+library(raster)
+library(anglr)
+library(textures)
+
+tfile <- tempfile(fileext = ".png")
+quad0 <- quad_texture(c(64, 64), texture = tfile)
+png::writePNG(ga_topo$img/255, tfile)
+aus <- subset(anglr::simpleworld, sovereignt == "Australia")
+aus_merc <- sp::spTransform(aus, ga_topo$crs)
+aus_wire <- copy_down(DEL0(aus_merc), 1000)
+
+quad0$vb[1L,] <- scales::rescale(quad0$vb[1,], to = ga_topo$extent[c("xmin", "xmax")])
+quad0$vb[2L,] <- scales::rescale(quad0$vb[2L,], to = ga_topo$extent[c("ymin", "ymax")])
+
+prj2 <- "+proj=lcc +lon_0=110 +lat_0=-30 +lat_1=-10 +lat_2=-40"
+
+quad0$vb[1:2, ] <- t(reproj::reproj(t(quad0$vb[1:2, ]), target = prj2,
+                                    source = ga_topo$crs)[,1:2])
+
+rgl::plot3d(quad0, specular = "black")
+wire3d(reproj::reproj(aus_wire, prj2), add = T)
+set_scene(zoom = 0.485)  ## why does this almost work
+aspect3d(1, 1, 0)
+r <- setExtent(flip(t(brick(rgl.pixels()*255)), "y"), par3d()$bbox[1:4])
+plotRGB(r)
+plot(spTransform(aus_merc, prj2), add = T)
 
 
 
