@@ -1,0 +1,65 @@
+---
+title: "design - textures package"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{design}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+## Design 
+
+Current functions are: 
+
+* **quad()** create a simple mesh3d object with 1 or more quad primitives
+* **quad_texture()** create a mesh3d object with 1 or more quads, and the texture coordinates and
+file path to a PNG file
+* **set_scene()** a convenience wrapper to rgl scene settings, it makes the scene look "straight-down" 
+ and locks pan and tilt so the rgl device like a zoom-in/zoom-out 2D displaye
+* **break_mesh()** break the topology of a mesh (so that primitives can be free-floating, not
+ tied to their neigbour's vertices)
+
+Both **quad()** and **quad_texture()** return 'mesh3d' objects that may be plotted direclty with
+ rgls `plot3d()`, `shade3d()`, `persp3d()`, `wire3d()`, or `dot3d()`. 
+
+
+* All coordinates are in  `x [0, 1]` and `y [0, 1]` and default to "y-up" (begin at 0)
+* Quad indexes are counter-clockwise, as required by rgl (see `material3d` `back` argument).
+* `ydown` flips the orientation so that y coordinates begin at 1 and count down, and ensures that quad indexes are reversed and correctly counter-clockwise. 
+
+### R functions using src/
+
+* `break_mesh()` - removes topology from mesh3d, by expanding every coordinate from vertex array
+* `quad()` generate mesh3d, a rectangular array of quads in the plane in 0,1
+* `quad_texture()` - extension of quad() to include image texture, all geometry and texture has identical x-y plane coordinates in 0,1
+
+
+### Rcpp package using quad.h
+
+Wrap `quad_ib` and `quad_vb` callable from R. 
+
+```C++
+IntegerVector quad_index_cpp(IntegerVector nx, IntegerVector ny, LogicalVector ydown) 
+NumericVector quad_vertex_cpp(IntegerVector nx, IntegerVector ny, LogicalVector ydown) 
+```
+
+### Headers 
+
+`./inst/include/quad/quad.h` namespace `quad`
+
+```C++
+// returns nx * ny mesh3d$ib (a 4 * (nx * ny) matrix with a column for each quad
+IntegerVector quad_ib(IntegerVector nx, IntegerVector ny, LogicalVector ydown);
+// returns nx * ny mesh3d$vb[1:2, ] (a 2 * ((nx+1) * (ny+1)) matrix of xy)
+NumericVector quad_vb(IntegerVector nx, IntegerVector ny, LogicalVector ydown);
+```
+
+ 
