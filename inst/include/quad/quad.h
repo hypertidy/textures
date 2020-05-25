@@ -6,10 +6,10 @@
 namespace quad {
  using namespace Rcpp;
 
-IntegerVector quad_ib(IntegerVector nx, IntegerVector ny, LogicalVector ydown);
-NumericVector quad_vb(IntegerVector nx, IntegerVector ny, LogicalVector ydown);
+//IntegerVector quad_ib(IntegerVector nx, IntegerVector ny, LogicalVector ydown);
+//NumericVector quad_vb(IntegerVector nx, IntegerVector ny, LogicalVector ydown);
 
-IntegerVector quad_ib(IntegerVector nx, IntegerVector ny, LogicalVector ydown) {
+inline IntegerVector quad_ib(IntegerVector nx, IntegerVector ny, LogicalVector ydown) {
     int len;
     int nc1;
     len = (nx[0]) * (ny[0]) * 4;
@@ -43,7 +43,7 @@ IntegerVector quad_ib(IntegerVector nx, IntegerVector ny, LogicalVector ydown) {
    return quad;
  }
 
- NumericVector quad_vb(IntegerVector nx, IntegerVector ny, LogicalVector ydown) {
+ inline NumericVector quad_vb(IntegerVector nx, IntegerVector ny, LogicalVector ydown) {
      int nc1 = nx[0] + 1;
      int nr1 = ny[0] + 1;
      double len = nc1 * nr1 * 2;
@@ -56,9 +56,11 @@ IntegerVector quad_ib(IntegerVector nx, IntegerVector ny, LogicalVector ydown) {
      double dx = 1/fx;
      double dy = 1/fy;
 
-     double xx [nc1];
-     double yy [nr1];
+//     double xx [nc1];
+//     double yy [nr1];
 
+     NumericVector xx(nc1);
+     NumericVector yy(nr1);
      int i;
      xx[0] = 0;
 
