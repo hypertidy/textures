@@ -23,6 +23,7 @@ Suggests:
     testthat,
     anglr,
     knitr,
+    png,
     rmarkdown
 LinkingTo: 
     Rcpp
