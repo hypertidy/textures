@@ -42,38 +42,33 @@ inline IntegerVector quad_ib(IntegerVector nx, IntegerVector ny, LogicalVector y
     }
    return quad;
  }
-
+// flesh out x and y coordinates at edges of 2D array of nx*ny quads
  inline NumericVector quad_vb(IntegerVector nx, IntegerVector ny, LogicalVector ydown) {
-     int nc1 = nx[0] + 1;
-     int nr1 = ny[0] + 1;
-     double len = nc1 * nr1 * 2;
+     int nc1 = nx[0] + 1;  // column edges
+     int nr1 = ny[0] + 1;  // row edges
+     double len = nc1 * nr1 * 2; // total length of output
+     int count = 0;   // ease chunking through loop
+     // output vector
      NumericVector vertex(len);
 
-     int count = 0;
-     double fx = (double)nx[0];
-     double fy = (double)ny[0];
-
-     double dx = 1/fx;
-     double dy = 1/fy;
-
-//     double xx [nc1];
-//     double yy [nr1];
-
-     NumericVector xx(nc1);
-     NumericVector yy(nr1);
-     int i;
-     xx[0] = 0;
-
-     for (i = 0; i < nc1; i++) {
-        xx[i] = i * dx;
-      // Rprintf("%f\n", xx[i]);
-     }
+     // step size from 0 to 1
+     double dx = 1/(double)nx[0];
+     double dy = 1/(double)ny[0];
 
      double ystart = 0;  // so we can ydown start at 1 and -dy
      if (ydown[0]) {
        ystart = 1;
        dy = -dy;
      }
+     // the 1D arrays across each margin, we calculate them first then expand-xy
+     NumericVector xx(nc1);
+     NumericVector yy(nr1);
+     // populate x
+     int i;
+     for (i = 0; i < nc1; i++) {
+        xx[i] = i * dx;
+     }
+    //  populate y
      for (int j = 0; j < nr1; j++) {
         yy[j] = ystart + j * dy;
      }

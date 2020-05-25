@@ -9,3 +9,7 @@ quad_vertex_cpp <- function(nx, ny, ydown) {
     .Call(`_textures_quad_vertex_cpp`, nx, ny, ydown)
 }
 
+quad_vertex_matrix_cpp <- function(nx, ny, ydown) {
+    .Call(`_textures_quad_vertex_matrix_cpp`, nx, ny, ydown)
+}
+
