@@ -17,15 +17,6 @@ knitr::opts_chunk$set(
 
 ## Design 
 
-Current functions are: 
-
-* **quad()** create a simple mesh3d object with 1 or more quad primitives
-* **quad_texture()** create a mesh3d object with 1 or more quads, and the texture coordinates and
-file path to a PNG file
-* **set_scene()** a convenience wrapper to rgl scene settings, it makes the scene look "straight-down" 
- and locks pan and tilt so the rgl device like a zoom-in/zoom-out 2D displaye
-* **break_mesh()** break the topology of a mesh (so that primitives can be free-floating, not
- tied to their neigbour's vertices)
 
 Both **quad()** and **quad_texture()** return 'mesh3d' objects that may be plotted direclty with
  rgls `plot3d()`, `shade3d()`, `persp3d()`, `wire3d()`, or `dot3d()`. 

@@ -19,6 +19,19 @@ explicitly and explained in a single-step.
 
 ## Design
 
+Current functions are:
+
+  - **png\_plot3d()** - plots a PNG file in a 3D scene
+  - **quad()** create a simple mesh3d object with 1 or more quad
+    primitives
+  - **quad\_texture()** create a mesh3d object with 1 or more quads, and
+    the texture coordinates and file path to a PNG file
+  - **set\_scene()** a convenience wrapper to rgl scene settings, it
+    makes the scene look “straight-down” and locks pan and tilt so the
+    rgl device like a zoom-in/zoom-out 2D displaye
+  - **break\_mesh()** break the topology of a mesh (so that primitives
+    can be free-floating, not tied to their neighbour’s vertices)
+
 See [design
 vignette](https://github.com/hypertidy/textures/blob/master/vignettes/design.Rmd).
 
