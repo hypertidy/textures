@@ -34,7 +34,9 @@ jobs:
      ## https://github.com/r-lib/actions/issues/78#issuecomment-611733294
       - name: Install XQuartz on macOS
         if: runner.os == 'macOS'
-        run: brew install Caskroom/cask/xquartz
+        run: |
+          brew install Caskroom/cask/xquartz
+          export DISPLAY=:99 # for rgl
         ##run: brew cask install xquartz
 
       - uses: r-lib/actions/setup-r@master
