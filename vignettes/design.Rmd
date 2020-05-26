@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 ## Design 
 
 
-Both **quad()** and **quad_texture()** return 'mesh3d' objects that may be plotted direclty with
+Both **quad()** and **quad_texture()** return 'mesh3d' objects that may be plotted directly with
  rgls `plot3d()`, `shade3d()`, `persp3d()`, `wire3d()`, or `dot3d()`. 
 
 
@@ -35,14 +35,19 @@ Both **quad()** and **quad_texture()** return 'mesh3d' objects that may be plott
 
 ### Rcpp package using quad.h
 
-Wrap `quad_ib` and `quad_vb` callable from R. 
+These are callable from R. 
 
 ```C++
 IntegerVector quad_index_cpp(IntegerVector nx, IntegerVector ny, LogicalVector ydown) 
 NumericVector quad_vertex_cpp(IntegerVector nx, IntegerVector ny, LogicalVector ydown) 
+NumericVector quad_vertex_matrix_cpp(IntegerVector nx, IntegerVector ny, LogicalVector ydown) 
+
 ```
 
 ### Headers 
+
+`quad_ib` and `quad_vb` both return flat vectors, `quad_matrix_vb` returns a matrix
+(with optionally z and h). 
 
 `./inst/include/quad/quad.h` namespace `quad`
 

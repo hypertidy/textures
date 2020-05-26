@@ -43,10 +43,16 @@ inline IntegerVector quad_ib(IntegerVector nx, IntegerVector ny, LogicalVector y
    return quad;
  }
 // flesh out x and y coordinates at edges of 2D array of nx*ny quads
- inline NumericVector quad_vb(IntegerVector nx, IntegerVector ny, LogicalVector ydown) {
+ inline NumericVector quad_vb(IntegerVector nx, IntegerVector ny,
+                              LogicalVector ydown,
+                              LogicalVector zh) {
      int nc1 = nx[0] + 1;  // column edges
      int nr1 = ny[0] + 1;  // row edges
-     double len = nc1 * nr1 * 2; // total length of output
+     int nrow = 2;
+     if (zh[0]) {
+       nrow = 4;
+     }
+     double len = nc1 * nr1 * nrow; // total length of output
      int count = 0;   // ease chunking through loop
      // output vector
      NumericVector vertex(len);
@@ -77,12 +83,31 @@ inline IntegerVector quad_ib(IntegerVector nx, IntegerVector ny, LogicalVector y
          for (int ii = 0; ii < nc1; ii++) {
            vertex[count + 0] = xx[ii];
            vertex[count + 1] = yy[jj];
-           count = count + 2;
+           if (zh[0]) {
+             vertex[count + 2] = 0; // z constant
+             vertex[count + 3] = 1; // h constant
+
+           }
+           count = count + nrow;
          }
     }
    return vertex;
  }
+// return matrix form of quad_vb (not interleaved) and optionally include z+h
+inline NumericMatrix quad_matrix_vb(IntegerVector nx, IntegerVector ny,
+                                    LogicalVector ydown,
+                                    LogicalVector zh) {
+  NumericVector v = quad_vb(nx, ny, ydown, zh);
+  int nr = 2;
+  if (zh[0]) {
+    nr = 4; // including z and h
+  }
+  // Set number of rows and columns to attribute dim
+  v.attr("dim") = Dimension(nr, (nx[0] + 1) * (ny[0] + 1));
 
-
+  // Converting to Rcpp Matrix type
+  NumericMatrix quadvb_matrix = as<NumericMatrix>(v);
+  return quadvb_matrix;
+}
 }
 #endif

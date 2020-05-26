@@ -42,9 +42,9 @@ quad <- function(dim = c(1L, 1L), ydown = FALSE, ...) {
   if ("texfile" %in% names(args)) warning("argument 'tex' is deprecated, use 'quad_texture()")
   if ("unmesh" %in% names(args)) warning("argument 'unmesh' is deprecated, use 'break_mesh()")
   if (length(dim) == 1L) {
-    dim <- c(dim, dim)
+   dim <- c(dim, dim)
   }
-  quad_cpp(dim[1L], dim[2L], ydown = ydown)
+  quad_cpp(dim[1L], dim[2L], ydown = ydown, zh = TRUE)
 }
 #' @name quad
 #' @export
@@ -68,9 +68,9 @@ plot.mesh3d <- function(x) {
   graphics::text(vb, lab = seq_len(nrow(vb)))
 }
 
-quad_cpp <- function(nx = 1, ny = nx, ydown = FALSE) {
-  xy <- matrix(quad_vertex_cpp(nx, ny, ydown = ydown), 2L) #, ydown = ydown)
-  rgl::qmesh3d(rbind(xy, z = 0, h = 1),
+quad_cpp <- function(nx = 1, ny = nx, ydown = FALSE, zh = TRUE) {
+  xyzh <- quad_vertex_matrix_cpp(nx, ny, ydown = ydown, zh = zh)
+  rgl::qmesh3d(xyzh,
                matrix(quad_index_cpp(nx, ny, ydown = ydown) + 1L, 4L), #, ydown = ydown),
                material = list(color = "#FFFFFFFF"))
 

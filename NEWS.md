@@ -1,4 +1,6 @@
-# textures 0.0.0.9005
+# textures 0.0.0.9020
+
+* quad.h now provides matrix version of vertex table, with or without z-h. 
 
 * New function `png_plot3d()` to directly plot from a PNG file. 
 

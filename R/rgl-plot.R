@@ -10,16 +10,17 @@
 #' @examples
 #' file <- system.file("extdata/Rlogo.png", package = "textures")
 #' png_plot3d(file)
-png_plot3d <- function(pngfile, dim = c(1, 1), height = FALSE) {
+png_plot3d <- function(pngfile, dim = c(1, 1)) {
   if (!file.exists(pngfile)) stop(sprintf("file '%s' does not exists", pngfile))
   v <- 0
-  if (height) {
-#    m <- .rgb_grey(png::readPNG(pngfile))
-    m <- apply(png::readPNG(pngfile), 1:2, mean)
-    m <- t(m[nrow(m):1, ])
-    v <- .matrix_vxy(m)
-    dim <- dim(m)
-  }
+  ## just a note for later
+#   if (height) {
+# #    m <- .rgb_grey(png::readPNG(pngfile))
+#     m <- apply(png::readPNG(pngfile), 1:2, mean)
+#     m <- t(m[nrow(m):1, ])
+#     v <- .matrix_vxy(m)
+#     dim <- dim(m)
+#   }
   qm <- quad_texture(dim, texture = pngfile)
   qm$vb[3L, ] <- v
   rgl::plot3d(qm, axes = FALSE, xlab = "", ylab = "", zlab = "", back = "lines")
@@ -31,7 +32,8 @@ png_plot3d <- function(pngfile, dim = c(1, 1), height = FALSE) {
   v <- c(0.30, 0.59, 0.11 )
   x[,,1L] * v[1L] + x[,,2L] * v[2L] + x[,,3L] * v[3L]
 }
-## anglr:::vxy
+## anglr:::vxy this takes a matrix and returns corner values (a defensible
+## approach to a cell-based image matrix)
 .matrix_vxy <- function(x, ...) {
   dm <- dim(x)
   nr <- dm[1L]

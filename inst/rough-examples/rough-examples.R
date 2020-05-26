@@ -28,7 +28,7 @@ wire3d(aus_wire, add = TRUE)
 # 2. reproject the canvas from the single quad above
 # ---------------------------------------------------
 ## now do the same but we reproject x,y to something non-native for the image
-## (it won't work very well)
+## (spoiler: it won't work very well)
 
 quad0$vb[1:2, ] <- t(reproj::reproj(t(quad0$vb[1:2, ]), target = laea,
                                  source = ga_topo$crs)[,1:2])
