@@ -39,8 +39,8 @@ These are callable from R.
 
 ```C++
 IntegerVector quad_index_cpp(IntegerVector nx, IntegerVector ny, LogicalVector ydown) 
-NumericVector quad_vertex_cpp(IntegerVector nx, IntegerVector ny, LogicalVector ydown) 
-NumericVector quad_vertex_matrix_cpp(IntegerVector nx, IntegerVector ny, LogicalVector ydown) 
+NumericVector quad_vertex_cpp(IntegerVector nx, IntegerVector ny, LogicalVector ydown, LogicalVector zh) 
+NumericVector quad_vertex_matrix_cpp(IntegerVector nx, IntegerVector ny, LogicalVector ydown, LogicalVector zh) 
 
 ```
 
@@ -52,10 +52,10 @@ NumericVector quad_vertex_matrix_cpp(IntegerVector nx, IntegerVector ny, Logical
 `./inst/include/quad/quad.h` namespace `quad`
 
 ```C++
-// returns nx * ny mesh3d$ib (a 4 * (nx * ny) matrix with a column for each quad
-IntegerVector quad_ib(IntegerVector nx, IntegerVector ny, LogicalVector ydown);
-// returns nx * ny mesh3d$vb[1:2, ] (a 2 * ((nx+1) * (ny+1)) matrix of xy)
-NumericVector quad_vb(IntegerVector nx, IntegerVector ny, LogicalVector ydown);
+IntegerVector quad_ib(IntegerVector nx, IntegerVector ny, LogicalVector ydown, LogicalVector zh);
+NumericVector quad_vb(IntegerVector nx, IntegerVector ny, LogicalVector ydown, LogicalVector zh);
+NumericVector quad_matrix_vb(IntegerVector nx, IntegerVector ny, LogicalVector ydown, LogicalVector zh);
+
 ```
 
  
