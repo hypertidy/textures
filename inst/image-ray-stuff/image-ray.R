@@ -46,7 +46,8 @@ m <- t(as.matrix(r))  ## we are unpicking the raster-orientation, this is almost
 lxyz <- list(x = seq(0.5, nrow(m) -0.5), y = seq(0.5, ncol(m)-0.5), z = m[, ncol(m):1])
 image(lxyz)
 
-
+## snapshotted here: https://twitter.com/mdsumner/status/1278707976287580167
+##
 library(rayshader)
 m %>%
   height_shade(texture = tail(palr::bathy_deep_pal(54), -5)) %>%
