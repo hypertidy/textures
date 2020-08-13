@@ -26,7 +26,7 @@ Create a simple quad mesh3d object
 }
 \details{
 Use \code{quad()} to create a mesh3d object with quad indexes to the vertices, this is
-defined in the rgl package by \link[rgl:qmesh3d]{qmesh3d()} and has elements
+defined in the rgl package by \link[rgl:mesh3d]{qmesh3d()} and has elements
 \code{vb} (the homogeneous coordinates 4xn) and \code{ib} (the quad index 4xn).
 
 The \code{meshColor} is currently hardcoded as 'vertices'.

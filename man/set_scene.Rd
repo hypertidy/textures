@@ -16,11 +16,11 @@ set_scene(
 \arguments{
 \item{interactive}{mouse interactive plot, default \code{FALSE}}
 
-\item{zoom}{zoom for \link[rgl:view3d]{rgl::view3d} default \code{0.5} which is closer than rgl 1}
+\item{zoom}{zoom for \link[rgl:viewpoint]{rgl::view3d} default \code{0.5} which is closer than rgl 1}
 
-\item{phi, theta}{polar coordinates, passed to \code{\link[rgl:view3d]{rgl::view3d()}}}
+\item{phi, theta}{polar coordinates, passed to \code{\link[rgl:viewpoint]{rgl::view3d()}}}
 
-\item{light_phi, light_theta}{polar coordinates, passed to \code{\link[rgl:light3d]{rgl::light3d()}} as
+\item{light_phi, light_theta}{polar coordinates, passed to \code{\link[rgl:light]{rgl::light3d()}} as
 \code{phi} and \code{theta} respectively}
 }
 \value{

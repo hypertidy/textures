@@ -105,4 +105,5 @@ m %>%
 
 plot3d(SC0(sf_ray), add = TRUE)
 
+plot3d(TRI0(sf_ray), add = TRUE)
 
