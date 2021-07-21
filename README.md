@@ -21,15 +21,15 @@ explicitly and explained in a single-step.
 
 Current functions are:
 
-  - **png\_plot3d()** - plots a PNG file in a 3D scene
-  - **quad()** create a simple mesh3d object with 1 or more quad
+-   **png\_plot3d()** - plots a PNG file in a 3D scene
+-   **quad()** create a simple mesh3d object with 1 or more quad
     primitives
-  - **quad\_texture()** create a mesh3d object with 1 or more quads, and
+-   **quad\_texture()** create a mesh3d object with 1 or more quads, and
     the texture coordinates and file path to a PNG file
-  - **set\_scene()** a convenience wrapper to rgl scene settings, it
+-   **set\_scene()** a convenience wrapper to rgl scene settings, it
     makes the scene look “straight-down” and locks pan and tilt so the
     rgl device like a zoom-in/zoom-out 2D displaye
-  - **break\_mesh()** break the topology of a mesh (so that primitives
+-   **break\_mesh()** break the topology of a mesh (so that primitives
     can be free-floating, not tied to their neighbour’s vertices)
 
 See [design
@@ -118,15 +118,15 @@ par3d(windowRect  = c(0, 0, 1024, 1024))
 
 *see ./rough-examples.R* WIP
 
-  - **rough-examples\#1**: See Mercator map above.
-  - **rough-examples\#2.**: Illustrate folly of low-density primitives
+-   **rough-examples\#1**: See Mercator map above.
+-   **rough-examples\#2.**: Illustrate folly of low-density primitives
     for reprojection
-  - **rough-examples\#3.**: Create a generalized surface in arbitrary
+-   **rough-examples\#3.**: Create a generalized surface in arbitrary
     map projection and remap the image losslessly
-  - **rough-examples\#4.**: Explore the use of primitive shapes for
+-   **rough-examples\#4.**: Explore the use of primitive shapes for
     placing image fragments arbitrarily
 
------
+------------------------------------------------------------------------
 
 ## Code of Conduct
 
