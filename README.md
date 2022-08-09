@@ -21,15 +21,15 @@ explicitly and explained in a single-step.
 
 Current functions are:
 
--   **png\_plot3d()** - plots a PNG file in a 3D scene
+-   **png_plot3d()** - plots a PNG file in a 3D scene
 -   **quad()** create a simple mesh3d object with 1 or more quad
     primitives
--   **quad\_texture()** create a mesh3d object with 1 or more quads, and
+-   **quad_texture()** create a mesh3d object with 1 or more quads, and
     the texture coordinates and file path to a PNG file
--   **set\_scene()** a convenience wrapper to rgl scene settings, it
+-   **set_scene()** a convenience wrapper to rgl scene settings, it
     makes the scene look “straight-down” and locks pan and tilt so the
     rgl device like a zoom-in/zoom-out 2D displaye
--   **break\_mesh()** break the topology of a mesh (so that primitives
+-   **break_mesh()** break the topology of a mesh (so that primitives
     can be free-floating, not tied to their neighbour’s vertices)
 
 See [design
@@ -60,12 +60,8 @@ png::writePNG(ga_topo$img/255, tfile)
 
 ## create a quad *canvas*, a single 4-corner shape floating in 3D
 ## (and use the PNG file as the material to texture that canvas)
-quad0 <- quad_texture(c(1, 1), texture = tfile)
+quad0 <- quad_texture(c(1, 1), extent = ga_topo$extent, texture = tfile, )
 
-## set the geography of the canvas, this is trivial because we have a rectangular
-## scale that applies directly as a scaling of x and y
-quad0$vb[1L,] <- scales::rescale(quad0$vb[1,], to = ga_topo$extent[c("xmin", "xmax")])
-quad0$vb[2L,] <- scales::rescale(quad0$vb[2L,], to = ga_topo$extent[c("ymin", "ymax")])
 
 ## plot it in 3D 
 rgl::open3d()
@@ -84,12 +80,14 @@ library(rgl)
 g <- ggplot(mpg, aes(displ, fill = drv)) + 
   geom_histogram(binwidth = 0.5) + 
   facet_wrap(~drv, ncol = 1)
+g
+
 tfile <- tempfile(fileext = ".png")
 ggsave(tfile, g)
 
 
 library(textures)
-quad0 <- quad_texture(dim = c(92, 102), texture = tfile)
+quad0 <- quad_texture(dimension = c(92, 102), texture = tfile)
 
 ex <- -20
 ## flip it (fixme later)
@@ -118,12 +116,12 @@ par3d(windowRect  = c(0, 0, 1024, 1024))
 
 *see ./rough-examples.R* WIP
 
--   **rough-examples\#1**: See Mercator map above.
--   **rough-examples\#2.**: Illustrate folly of low-density primitives
+-   **rough-examples#1**: See Mercator map above.
+-   **rough-examples#2.**: Illustrate folly of low-density primitives
     for reprojection
--   **rough-examples\#3.**: Create a generalized surface in arbitrary
-    map projection and remap the image losslessly
--   **rough-examples\#4.**: Explore the use of primitive shapes for
+-   **rough-examples#3.**: Create a generalized surface in arbitrary map
+    projection and remap the image losslessly
+-   **rough-examples#4.**: Explore the use of primitive shapes for
     placing image fragments arbitrarily
 
 ------------------------------------------------------------------------

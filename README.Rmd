@@ -72,12 +72,8 @@ png::writePNG(ga_topo$img/255, tfile)
 
 ## create a quad *canvas*, a single 4-corner shape floating in 3D
 ## (and use the PNG file as the material to texture that canvas)
-quad0 <- quad_texture(c(1, 1), texture = tfile)
+quad0 <- quad_texture(c(1, 1), extent = ga_topo$extent, texture = tfile, )
 
-## set the geography of the canvas, this is trivial because we have a rectangular
-## scale that applies directly as a scaling of x and y
-quad0$vb[1L,] <- scales::rescale(quad0$vb[1,], to = ga_topo$extent[c("xmin", "xmax")])
-quad0$vb[2L,] <- scales::rescale(quad0$vb[2L,], to = ga_topo$extent[c("ymin", "ymax")])
 
 ## plot it in 3D 
 rgl::open3d()
@@ -110,12 +106,14 @@ library(rgl)
 g <- ggplot(mpg, aes(displ, fill = drv)) + 
   geom_histogram(binwidth = 0.5) + 
   facet_wrap(~drv, ncol = 1)
+g
+
 tfile <- tempfile(fileext = ".png")
 ggsave(tfile, g)
 
 
 library(textures)
-quad0 <- quad_texture(dim = c(92, 102), texture = tfile)
+quad0 <- quad_texture(dimension = c(92, 102), texture = tfile)
 
 ex <- -20
 ## flip it (fixme later)

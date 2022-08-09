@@ -72,6 +72,7 @@ quad <- function(dimension = c(1L, 1L), extent = NULL, ydown = FALSE, ...) {
 quad_texture <- function(dimension = c(1L, 1L), extent = NULL,  ydown = FALSE, texture = "") {
   x <- quad(dimension, ydown = ydown)
   x$texcoords <- x$vb[1:2, ]
+  if (is.null(extent)) extent <- c(0L, dimension[1], 0L, dimension[2L])
   x$vb[1, ] <- scales::rescale(x$vb[1, ], extent[1:2])
   x$vb[2, ] <- scales::rescale(x$vb[2, ], extent[3:4])
 
