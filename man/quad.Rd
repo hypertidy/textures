@@ -7,7 +7,7 @@
 \usage{
 quad(dimension = c(1L, 1L), extent = NULL, ydown = FALSE, ...)
 
-quad_texture(dimension = c(1L, 1L), ydown = FALSE, texture = "")
+quad_texture(dimension = c(1L, 1L), extent = NULL, ydown = FALSE, texture = "")
 }
 \arguments{
 \item{dimension}{dimensions of mesh (using \code{\link[=matrix]{matrix()}} and \code{\link[=image]{image()}} orientation)}

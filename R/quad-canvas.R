@@ -1,3 +1,18 @@
+## function to convert matrix to corner values (it's approx, but useful)
+.vxy <- function (x, ...)
+{
+  dm <- dim(x)
+  nr <- dm[1L]
+  nc <- dm[2L]
+  tl <- cbind(NA_integer_, rbind(NA_integer_, x))
+  tr <- cbind(NA_integer_, rbind(x, NA_integer_))
+  bl <- cbind(rbind(NA_integer_, x), NA_integer_)
+  br <- cbind(rbind(x, NA_integer_), NA_integer_)
+  .colMeans(matrix(c(tl, tr, bl, br), 4L, byrow = TRUE), m = 4L,
+            n = (nr + 1L) * (nc + 1L), na.rm = TRUE)
+}
+
+
 #' Quad canvas
 #'
 #' Create a simple quad mesh3d object
@@ -48,15 +63,18 @@ quad <- function(dimension = c(1L, 1L), extent = NULL, ydown = FALSE, ...) {
   out <- quad_cpp(as.integer(dimension[1L]), as.integer(dimension[2L]), ydown = ydown, zh = TRUE)
   if (!is.null(extent)) {
     out$vb[1L, ] <- scales::rescale(out$vb[1L, ], extent[1:2])
-    out$vb[2L, ] <- scales::rescale(out$vb[1L, ], extent[3:4])
+    out$vb[2L, ] <- scales::rescale(out$vb[2L, ], extent[3:4])
   }
   out
 }
 #' @name quad
 #' @export
-quad_texture <- function(dimension = c(1L, 1L), ydown = FALSE, texture = "") {
+quad_texture <- function(dimension = c(1L, 1L), extent = NULL,  ydown = FALSE, texture = "") {
   x <- quad(dimension, ydown = ydown)
   x$texcoords <- x$vb[1:2, ]
+  x$vb[1, ] <- scales::rescale(x$vb[1, ], extent[1:2])
+  x$vb[2, ] <- scales::rescale(x$vb[2, ], extent[3:4])
+
   if (nchar(texture) == 1L) {
     warning("no texture file given")
   }

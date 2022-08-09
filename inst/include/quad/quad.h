@@ -19,26 +19,29 @@ inline integers quad_ib(integers nx, integers ny, logicals ydown) {
     nc1 = nx[0] + 1L; // nx columns
     //int nr1 = ny[0] + 1; // ny rows
     writable::integers quad(len);
-    int bl, br, tr, tl; // bottom left, bottom right, top left, top right
+    //int bl, br, tr, tl; // bottom left, bottom right, top right, top left
+    int v1, v2, v3, v4;  // order is ydown: bl, br, tr, tl
+                         //          yup  :
     int count = 0;
     for (int i = 0; i < nx[0]; i++) {
        for (int j = 0; j < ny[0]; j++) {
-          bl = i + j * nc1;
-          br = i + 1 + j * nc1;
-          tr = br + nc1;
-          tl = bl + nc1;
+          v1 = i + j * nc1;
+          v2 = i + 1 + j * nc1;
+          v3 = v2 + nc1;
+          v4 = v1 + nc1;
           if (ydown[0]) {
-            quad[count + 3] = bl;
-            quad[count + 2] = br;
-            quad[count + 1] = tr;
-            quad[count + 0] = tl;
+
+            quad[count + 0] = v3;
+            quad[count + 1] = v4;
+            quad[count + 2] = v1;
+            quad[count + 3] = v2;
             count = count + 4;
 
           } else {
-           quad[count] = bl;
-           quad[count + 1] = br;
-           quad[count + 2] = tr;
-           quad[count + 3] = tl;
+           quad[count + 0] = v1;
+           quad[count + 1] = v2;
+           quad[count + 2] = v3;
+           quad[count + 3] = v4;
             count = count + 4;
         }
     }
