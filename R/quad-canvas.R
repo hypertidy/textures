@@ -17,10 +17,11 @@
 #' 'tex' to indicate that texture should be included, 'texfile' a link to the texture file path,
 #' and 'unmesh' to remove topology by expanding the vertices
 #' .
-#' Please now use [quad_texture()] for textures, and `dim` argument (length 1 or 2),
+#' Please now use [quad_texture()] for textures, and `dimension` argument (length 1 or 2),
 #' and [break_mesh()].
 #'
-#' @param dim dimensions of mesh (using [matrix()] and [image()] orientation)
+#' @param dimension dimensions of mesh (using [matrix()] and [image()] orientation)
+#' @param extent optional extent of mesh xmin, xmax, ymin, ymax
 #' @param texture file path to PNG image (may not exist)
 #' @param ydown should y-coordinate be counted from top (default `FALSE`)
 #' @param ... used only to warn about old usage
@@ -35,21 +36,26 @@
 #' qm$meshColor <- "faces"
 #' qm$material$color <- hcl.colors(12, "YlOrRd", rev = TRUE)[scl(volcano) * 11 + 1]
 #' rgl::plot3d(qm)
-quad <- function(dim = c(1L, 1L), ydown = FALSE, ...) {
+quad <- function(dimension = c(1L, 1L), extent = NULL, ydown = FALSE, ...) {
   args <- list(...)
-  if ("depth" %in% names(args)) warning("argument 'depth' is deprecated, use 'dim = '")
-  if ("tex" %in% names(args)) warning("argument 'tex' is deprecated, use 'quad_texture()")
-  if ("texfile" %in% names(args)) warning("argument 'tex' is deprecated, use 'quad_texture()")
-  if ("unmesh" %in% names(args)) warning("argument 'unmesh' is deprecated, use 'break_mesh()")
-  if (length(dim) == 1L) {
-   dim <- c(dim, dim)
+
+  # if ("tex" %in% names(args)) warning("argument 'tex' is deprecated, use 'quad_texture()")
+  # if ("texfile" %in% names(args)) warning("argument 'tex' is deprecated, use 'quad_texture()")
+  # if ("unmesh" %in% names(args)) warning("argument 'unmesh' is deprecated, use 'break_mesh()")
+  if (length(dimension) == 1L) {
+   dimension <- c(dimension, dimension)
   }
-  quad_cpp(dim[1L], dim[2L], ydown = ydown, zh = TRUE)
+  out <- quad_cpp(dimension[1L], dimension[2L], ydown = ydown, zh = TRUE)
+  if (!is.null(extent)) {
+    out$vb[1L, ] <- scales::rescale(out$vb[1L, ], extent[1:2])
+    out$vb[2L, ] <- scales::rescale(out$vb[1L, ], extent[3:4])
+  }
+  out
 }
 #' @name quad
 #' @export
-quad_texture <- function(dim = c(1L, 1L), ydown = FALSE, texture = "") {
-  x <- quad(dim, ydown = ydown)
+quad_texture <- function(dimension = c(1L, 1L), ydown = FALSE, texture = "") {
+  x <- quad(dimension, ydown = ydown)
   x$texcoords <- x$vb[1:2, ]
   if (nchar(texture) == 1L) {
     warning("no texture file given")
