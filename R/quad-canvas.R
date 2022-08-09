@@ -45,7 +45,7 @@ quad <- function(dimension = c(1L, 1L), extent = NULL, ydown = FALSE, ...) {
   if (length(dimension) == 1L) {
    dimension <- c(dimension, dimension)
   }
-  out <- quad_cpp(dimension[1L], dimension[2L], ydown = ydown, zh = TRUE)
+  out <- quad_cpp(as.integer(dimension[1L]), as.integer(dimension[2L]), ydown = ydown, zh = TRUE)
   if (!is.null(extent)) {
     out$vb[1L, ] <- scales::rescale(out$vb[1L, ], extent[1:2])
     out$vb[2L, ] <- scales::rescale(out$vb[1L, ], extent[3:4])

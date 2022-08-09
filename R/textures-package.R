@@ -5,7 +5,6 @@
 # roxygen namespace tags. Modify with care!
 ## usethis namespace: start
 #' @useDynLib textures, .registration = TRUE
-#' @importFrom Rcpp sourceCpp
 ## usethis namespace: end
 NULL
 
