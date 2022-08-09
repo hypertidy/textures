@@ -5,12 +5,14 @@
 \alias{quad_texture}
 \title{Quad canvas}
 \usage{
-quad(dim = c(1L, 1L), ydown = FALSE, ...)
+quad(dimension = c(1L, 1L), extent = NULL, ydown = FALSE, ...)
 
-quad_texture(dim = c(1L, 1L), ydown = FALSE, texture = "")
+quad_texture(dimension = c(1L, 1L), ydown = FALSE, texture = "")
 }
 \arguments{
-\item{dim}{dimensions of mesh (using \code{\link[=matrix]{matrix()}} and \code{\link[=image]{image()}} orientation)}
+\item{dimension}{dimensions of mesh (using \code{\link[=matrix]{matrix()}} and \code{\link[=image]{image()}} orientation)}
+
+\item{extent}{optional extent of mesh xmin, xmax, ymin, ymax}
 
 \item{ydown}{should y-coordinate be counted from top (default \code{FALSE})}
 
@@ -41,7 +43,7 @@ Note that an early version used arguments 'depth' (to control \code{\link[rgl:su
 'tex' to indicate that texture should be included, 'texfile' a link to the texture file path,
 and 'unmesh' to remove topology by expanding the vertices
 .
-Please now use \code{\link[=quad_texture]{quad_texture()}} for textures, and \code{dim} argument (length 1 or 2),
+Please now use \code{\link[=quad_texture]{quad_texture()}} for textures, and \code{dimension} argument (length 1 or 2),
 and \code{\link[=break_mesh]{break_mesh()}}.
 }
 

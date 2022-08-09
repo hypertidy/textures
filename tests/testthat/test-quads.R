@@ -12,8 +12,8 @@ test_that("quad works, basic 1x1 canvas", {
                structure(c(0, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1), .Dim = c(4L,4L)))
   expect_equal(q0$ib,
                structure(c(1L, 2L, 4L, 3L), .Dim = c(4L, 1L)))
-  expect_equal(q0[-c(1, 2)], qmesh_hull)
 
+  expect_equal(q0[-c(1, length(q0))], qmesh_hull)
 
   ## --- break the mesh and we have a different orientation, because the vertices
   ## are now in the order they are indexed and no index is repeated
@@ -104,7 +104,7 @@ test_that("quad works, 5x4 canvas", {
                vb_5x4)
   expect_equal(q1$ib,
                ib_5x4)
-  expect_equal(q1[-c(1, 2)], qmesh_hull)
+  expect_equal(q1[-c(1, length(q1))], qmesh_hull)
 
   ## --- break the mesh and we have a different orientation, because the vertices
   ## are now in the order they are indexed and no index is repeated
