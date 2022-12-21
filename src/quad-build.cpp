@@ -1,6 +1,6 @@
 #include "cpp11.hpp"
 
-#include "quad/quad.h"
+#include  <quad.h>
 #include "cpp11/matrix.hpp"
 #include "cpp11/logicals.hpp"
 

@@ -1,5 +1,7 @@
 # textures dev
 
+* Covert to use headers package {quad}. 
+
 * Convert to cpp11. 
 
 * Now using 'main' as default branch in git. 
