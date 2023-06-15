@@ -51,6 +51,9 @@ plot.mesh3d <- function(x,  ..., asp = 1, add = FALSE, axes = TRUE, border = "bl
     xx <- x$vb[1L, x$is]
     yy <- x$vb[2L, x$is]
 
+    if (is.null(col) || is.na(col[1L])) {
+      col <- border
+    }
     grid::grid.polyline(xx, yy, id = rep(seq_len(ncol(x$is)), each = 2L),  gp = grid::gpar(col = col,  alpha = alpha, lwd = lwd, lty = lty),
                        default.units = "native")
   }
