@@ -89,12 +89,12 @@ quad_texture <- function(dimension = c(1L, 1L), extent = NULL,  ydown = FALSE, t
  x
 }
 
-plot.mesh3d <- function(x) {
-  ib <- x$ib
-  vb <- t(x$vb)
-  plot(vb, type = "n", asp = 1)
-  graphics::text(vb, lab = seq_len(nrow(vb)))
-}
+# plot.mesh3d <- function(x) {
+#   ib <- x$ib
+#   vb <- t(x$vb)
+#   plot(vb, type = "n", asp = 1)
+#   graphics::text(vb, lab = seq_len(nrow(vb)))
+# }
 
 quad_cpp <- function(nx = 1, ny = nx, ydown = FALSE, zh = TRUE) {
   xyzh <- quad_vertex_matrix_cpp(nx, ny, ydown = ydown, zh = zh)
