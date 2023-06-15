@@ -1,6 +1,6 @@
 Package: textures
 Title: Plot 3D Textures as 2D Graphics (Kinda)
-Version: 0.0.0.9022
+Version: 0.0.0.9023
 Authors@R: 
     person(given = "Michael D.",
            family = "Sumner",

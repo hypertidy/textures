@@ -1,6 +1,8 @@
 # textures dev
 
-* Covert to use headers package {quad}. 
+* Add `segs()` function. 
+
+* Convert to use headers package {quad}. 
 
 * Convert to cpp11. 
 

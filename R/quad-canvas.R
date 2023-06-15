@@ -21,6 +21,9 @@
 #' defined in the rgl package by [qmesh3d()][rgl::qmesh3d] and has elements
 #' `vb` (the homogeneous coordinates 4xn) and `ib` (the quad index 4xn).
 #'
+#' Use `seg()` to create a mesh3d object with segment indexes, exactly analogous to the mesh created by
+#' `quad()` just only containing the quad edges/segments - note that segments are unique.
+#'
 #' The `meshColor` is currently hardcoded as 'vertices'.
 #'
 #' Use `quad_texture()` to create a mesh3d object additionally with `texcoords` and
@@ -42,7 +45,7 @@
 #' @param ... used only to warn about old usage
 #' @return mesh3d with quads and material texture settings as per inputs
 #' @export
-#' @aliases quad_texture
+#' @aliases quad_texture segs
 #' @examples
 #' qm <- quad()
 #' ## orientation is low to high, x then y
