@@ -1,0 +1,38 @@
+url: https://hypertidy.github.io/textures/
+
+template:
+  bootstrap: 5
+  light-switch: true
+  bslib:
+    preset: bootstrap
+    primary: "#1f6f8b"
+    code-bg: "#f6f8fa"
+    base_font: {google: "Atkinson Hyperlegible"}
+    heading_font: {google: "Atkinson Hyperlegible"}
+    code_font: {google: "JetBrains Mono"}
+
+reference:
+- title: Compact specification
+  desc: The recipe for a generatable mesh, nothing materialized
+  contents:
+  - quad_spec
+- title: Mesh primitives
+  desc: Index, edges (unexpanded), and vertices from dimension and extent
+  contents:
+  - quad_index
+  - quad_edges
+  - quad_vertex
+- title: Mesh objects
+  contents:
+  - quad
+  - quad_texture
+  - break_mesh
+  - segs
+- title: Plotting
+  contents:
+  - plot.mesh3d
+  - png_plot3d
+  - set_scene
+- title: Data
+  contents:
+  - ga_topo
