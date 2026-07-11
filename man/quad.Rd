@@ -60,5 +60,4 @@ qm <- quad(dim(volcano))
 scl <- function(x) (x - min(x, na.rm = TRUE))/diff(range(x, na.rm = TRUE))
 qm$meshColor <- "faces"
 qm$material$color <- hcl.colors(12, "YlOrRd", rev = TRUE)[scl(volcano) * 11 + 1]
-rgl::plot3d(qm)
 }

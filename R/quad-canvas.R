@@ -53,7 +53,9 @@
 #' scl <- function(x) (x - min(x, na.rm = TRUE))/diff(range(x, na.rm = TRUE))
 #' qm$meshColor <- "faces"
 #' qm$material$color <- hcl.colors(12, "YlOrRd", rev = TRUE)[scl(volcano) * 11 + 1]
-#' rgl::plot3d(qm)
+#' if (requireNamespace("rgl")) {
+#'  rgl::plot3d(qm)
+#'  }
 quad <- function(dimension = c(1L, 1L), extent = NULL, ydown = FALSE, ...) {
   args <- list(...)
 
