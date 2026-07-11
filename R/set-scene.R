@@ -25,12 +25,12 @@
 #'
 #' @return nothing
 #' @export
-#' @importFrom rgl par3d view3d pop3d aspect3d rgl.bringtotop
-#' @examples
+#' @examplesIf interactive() && requireNamespace("rgl", quietly = TRUE)
 #' ## see README and in-dev examples in rough-examples.R
 #' rgl::plot3d(rnorm(10), rnorm(10), rnorm(1)); set_scene()
 set_scene <- function(interactive = FALSE, zoom = 0.5, phi = 0, theta = 0,
                       light_phi = -45, light_theta  = 0) {
+  if (!requireNamespace("rgl", quietly = TRUE)) stop("the 'rgl' package is required for set_scene()")
   rgl::par3d(windowRect = c(0, 0, 1024, 1024))
   rgl::view3d(phi = phi, theta = theta, interactive = interactive, zoom = zoom)
   rgl::pop3d(type = "lights")

@@ -11,7 +11,7 @@
 #' @export
 #'
 #' @examples
-#' (mesh <- quad(depth = 3))
+#' (mesh <- quad(c(3, 3)))
 #' ## same number of primitives, more vertices (every coordinate)
 #' break_mesh(mesh)
 break_mesh <- function(x) {

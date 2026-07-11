@@ -7,10 +7,11 @@
 #'  as a side effect creates a 3D interactive plot
 #' @export
 #'
-#' @examples
+#' @examplesIf interactive() && requireNamespace("rgl", quietly = TRUE)
 #' file <- system.file("extdata/Rlogo.png", package = "textures")
 #' png_plot3d(file)
 png_plot3d <- function(pngfile, dim = c(1, 1)) {
+  if (!requireNamespace("rgl", quietly = TRUE)) stop("the 'rgl' package is required for png_plot3d()")
   if (!file.exists(pngfile)) stop(sprintf("file '%s' does not exists", pngfile))
   v <- 0
   ## just a note for later

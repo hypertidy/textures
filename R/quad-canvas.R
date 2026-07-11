@@ -65,8 +65,8 @@ quad <- function(dimension = c(1L, 1L), extent = NULL, ydown = FALSE, ...) {
   }
   out <- quad_cpp(as.integer(dimension[1L]), as.integer(dimension[2L]), ydown = ydown, zh = TRUE)
   if (!is.null(extent)) {
-    out$vb[1L, ] <- scales::rescale(out$vb[1L, ], extent[1:2])
-    out$vb[2L, ] <- scales::rescale(out$vb[2L, ], extent[3:4])
+    out$vb[1L, ] <- .rescale(out$vb[1L, ], extent[1:2])
+    out$vb[2L, ] <- .rescale(out$vb[2L, ], extent[3:4])
   }
   out
 }
@@ -76,13 +76,12 @@ quad_texture <- function(dimension = c(1L, 1L), extent = NULL,  ydown = FALSE, t
   x <- quad(dimension, ydown = ydown)
   x$texcoords <- x$vb[1:2, ]
   if (is.null(extent)) extent <- c(0L, dimension[1], 0L, dimension[2L])
-  x$vb[1, ] <- scales::rescale(x$vb[1, ], extent[1:2])
-  x$vb[2, ] <- scales::rescale(x$vb[2, ], extent[3:4])
+  x$vb[1, ] <- .rescale(x$vb[1, ], extent[1:2])
+  x$vb[2, ] <- .rescale(x$vb[2, ], extent[3:4])
 
-  if (nchar(texture) == 1L) {
+  if (!nzchar(texture)) {
     warning("no texture file given")
-  }
-  if (!file.exists(texture)) {
+  } else if (!file.exists(texture)) {
     warning("texture file given does not exist")
   }
   x$material$texture <- texture
@@ -98,10 +97,8 @@ quad_texture <- function(dimension = c(1L, 1L), extent = NULL,  ydown = FALSE, t
 
 quad_cpp <- function(nx = 1, ny = nx, ydown = FALSE, zh = TRUE) {
   xyzh <- quad_vertex_matrix_cpp(nx, ny, ydown = ydown, zh = zh)
-  rgl::qmesh3d(xyzh,
-               matrix(quad_index_cpp(nx, ny, ydown = ydown) + 1L, 4L), #, ydown = ydown),
-               material = list(color = "#FFFFFFFF"))
-
+  .mesh3d_quads(xyzh,
+                matrix(quad_index_cpp(nx, ny, ydown = ydown) + 1L, 4L))
 }
 
 

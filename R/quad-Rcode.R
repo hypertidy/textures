@@ -43,8 +43,7 @@ vb_vertex <- function(nx = 1L, ny = nx, ydown = FALSE) {
 }
 quad_ <- function(nx = 1, ny = nx, ydown = FALSE) {
   xy <- vb_vertex(nx, ny, ydown = ydown)
-  rgl::qmesh3d(rbind(t(xy), z = 0, h = 1),
-               ib_index(nx, ny, ydown = ydown),
-               material = list(color = "#FFFFFFFF"))
+  .mesh3d_quads(rbind(t(xy), z = 0, h = 1),
+                ib_index(nx, ny, ydown = ydown))
 }
 
