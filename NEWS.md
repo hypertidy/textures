@@ -33,7 +33,7 @@
 * `quad_texture()` with an empty texture path now warns 'no texture file
   given' rather than 'texture file given does not exist'.
 
-# textures dev
+# textures 0.0.1
 
 * Add `segs()` function. 
 

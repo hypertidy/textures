@@ -22,9 +22,9 @@ NULL
 #'
 #' The image is named 'Australian Topographic Base Map (Web Mercator)' and is
 #' from the following Geoscience Australia Web Map Tile Service (WMTS):
-#' \url{https://gaservices.ga.gov.au/gis/rest/services/Topographic_Base_Map_WM/MapServer}.
+#' \url{https://services.ga.gov.au/gis/rest/services/Topographic_Base_Map/MapServer}.
 #'
-#' Code to obtain the image is in 'data-raw/ga_topo.R' at {https://github.com/hypertidy/textures}
+#' Code to obtain the image is in 'data-raw/ga_topo.R' at \url{https://github.com/hypertidy/textures}
 #' using the wmts package \url{https://github.com/mdsumner/wmts}.
 #'
 #' @name ga_topo

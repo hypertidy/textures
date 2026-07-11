@@ -36,6 +36,5 @@ LinkingTo:
 VignetteBuilder: knitr
 URL: https://github.com/hypertidy/textures, https://hypertidy.github.io/textures/
 BugReports: https://github.com/hypertidy/textures/issues
-SystemRequirements: C++11
-Remotes: hypertidy/quad
+Remotes: hypertidy/quadConfig/roxygen2/version: 8.0.0
 Config/roxygen2/version: 8.0.0
