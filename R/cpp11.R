@@ -4,6 +4,10 @@ quad_index_cpp <- function(nx, ny, ydown) {
   .Call(`_textures_quad_index_cpp`, nx, ny, ydown)
 }
 
+quad_index_dbl_cpp <- function(nx, ny, ydown) {
+  .Call(`_textures_quad_index_dbl_cpp`, nx, ny, ydown)
+}
+
 quad_vertex_cpp <- function(nx, ny, ydown, zh) {
   .Call(`_textures_quad_vertex_cpp`, nx, ny, ydown, zh)
 }
