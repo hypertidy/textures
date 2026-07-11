@@ -63,12 +63,7 @@ quad <- function(dimension = c(1L, 1L), extent = NULL, ydown = FALSE, ...) {
   if (length(dimension) == 1L) {
    dimension <- c(dimension, dimension)
   }
-  out <- quad_cpp(as.integer(dimension[1L]), as.integer(dimension[2L]), ydown = ydown, zh = TRUE)
-  if (!is.null(extent)) {
-    out$vb[1L, ] <- .rescale(out$vb[1L, ], extent[1:2])
-    out$vb[2L, ] <- .rescale(out$vb[2L, ], extent[3:4])
-  }
-  out
+  quad_mesh(quad_spec(dimension, extent = extent, ydown = ydown))
 }
 #' @name quad
 #' @export
@@ -95,11 +90,7 @@ quad_texture <- function(dimension = c(1L, 1L), extent = NULL,  ydown = FALSE, t
 #   graphics::text(vb, lab = seq_len(nrow(vb)))
 # }
 
-quad_cpp <- function(nx = 1, ny = nx, ydown = FALSE, zh = TRUE) {
-  xyzh <- quad_vertex_matrix_cpp(nx, ny, ydown = ydown, zh = zh)
-  .mesh3d_quads(xyzh,
-                matrix(quad_index_cpp(nx, ny, ydown = ydown) + 1L, 4L))
-}
+
 
 
 
