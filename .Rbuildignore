@@ -10,3 +10,4 @@
 ^\.claude$
 ^docs$
 ^cran-comments\.md$
+^CRAN-SUBMISSION$

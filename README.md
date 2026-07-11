@@ -5,9 +5,9 @@
 
 <!-- badges: start -->
 
-[![R build
-status](https://github.com/hypertidy/textures/workflows/R-CMD-check/badge.svg)](https://github.com/hypertidy/textures/actions)
 [![R-CMD-check](https://github.com/hypertidy/textures/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/hypertidy/textures/actions/workflows/R-CMD-check.yaml)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/textures)](https://CRAN.R-project.org/package=textures)
 <!-- badges: end -->
 
 The goal of textures is to utilize texture mapping in rgl to work with
