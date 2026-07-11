@@ -6,11 +6,11 @@
 \alias{segs}
 \title{Quad mesh objects}
 \usage{
-quad(dimension = c(1L, 1L), extent = NULL, ydown = FALSE, ...)
+quad(dimension = c(1L, 1L), extent = NULL, ydown = FALSE)
 
 quad_texture(dimension = c(1L, 1L), extent = NULL, ydown = FALSE, texture = "")
 
-segs(dimension = c(1L, 1L), extent = NULL, ydown = FALSE, ...)
+segs(dimension = c(1L, 1L), extent = NULL, ydown = FALSE)
 }
 \arguments{
 \item{dimension}{dimensions of mesh (using \code{\link[=matrix]{matrix()}} and \code{\link[=image]{image()}} orientation)}
@@ -18,8 +18,6 @@ segs(dimension = c(1L, 1L), extent = NULL, ydown = FALSE, ...)
 \item{extent}{optional extent of mesh xmin, xmax, ymin, ymax}
 
 \item{ydown}{should y-coordinate be counted from top (default \code{FALSE})}
-
-\item{...}{used only to warn about old usage}
 
 \item{texture}{file path to PNG image (may not exist)}
 }

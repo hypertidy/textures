@@ -34,7 +34,6 @@
 #' @param extent optional extent of mesh xmin, xmax, ymin, ymax
 #' @param texture file path to PNG image (may not exist)
 #' @param ydown should y-coordinate be counted from top (default `FALSE`)
-#' @param ... used only to warn about old usage
 #' @return mesh3d with quads and material texture settings as per inputs
 #' @export
 #' @family textures
@@ -49,12 +48,7 @@
 #' if (requireNamespace("rgl")) {
 #'  rgl::plot3d(qm)
 #'  }
-quad <- function(dimension = c(1L, 1L), extent = NULL, ydown = FALSE, ...) {
-  args <- list(...)
-
-  # if ("tex" %in% names(args)) warning("argument 'tex' is deprecated, use 'quad_texture()")
-  # if ("texfile" %in% names(args)) warning("argument 'tex' is deprecated, use 'quad_texture()")
-  # if ("unmesh" %in% names(args)) warning("argument 'unmesh' is deprecated, use 'break_mesh()")
+quad <- function(dimension = c(1L, 1L), extent = NULL, ydown = FALSE) {
   if (length(dimension) == 1L) {
    dimension <- c(dimension, dimension)
   }
