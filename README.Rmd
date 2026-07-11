@@ -38,13 +38,12 @@ Current functions are:
 * **quad()** create a simple mesh3d object with 1 or more quad primitives
 * **quad_texture()** create a mesh3d object with 1 or more quads, and the texture coordinates and
 file path to a PNG file
-* **set_scene()** a convenience wrapper to rgl scene settings, it makes the scene look "straight-down" 
- and locks pan and tilt so the rgl device like a zoom-in/zoom-out 2D displaye
+* **set_scene()** a convenience wrapper to rgl scene settings, it makes the scene look "straight-down"  and locks pan and tilt so the rgl device like a zoom-in/zoom-out 2D displaye
 * **break_mesh()** break the topology of a mesh (so that primitives can be free-floating, not
  tied to their neighbour's vertices)
 
 
-See [design vignette](https://github.com/hypertidy/textures/blob/master/vignettes/design.Rmd). 
+See [design vignette](https://hypertidy.github.io/textures/articles/design.html). 
 
  
 ## Installation

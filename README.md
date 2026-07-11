@@ -34,7 +34,7 @@ Current functions are:
   be free-floating, not tied to their neighbour’s vertices)
 
 See [design
-vignette](https://github.com/hypertidy/textures/blob/master/vignettes/design.Rmd).
+vignette](https://hypertidy.github.io/textures/articles/design.html).
 
 ## Installation
 
