@@ -9,7 +9,7 @@ template:
     code-bg: "#f6f8fa"
     base_font: {google: "Atkinson Hyperlegible"}
     heading_font: {google: "Atkinson Hyperlegible"}
-    code_font: {google: "JetBrains Mono"}
+    code_font: {google: "solarized light"}
 
 reference:
 - title: Compact specification
