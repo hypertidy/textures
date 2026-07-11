@@ -13,7 +13,6 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
 Imports: 
     rgl,
     scales
@@ -30,4 +29,5 @@ LinkingTo:
     quad
 VignetteBuilder: knitr
 SystemRequirements: C++11
-Remotes: hypertidy/quad
+Remotes: hypertidy/quad, hypertidy/anglr
+Config/roxygen2/version: 8.0.0

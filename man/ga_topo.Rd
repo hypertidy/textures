@@ -30,7 +30,7 @@ Commons Attribution 4.0 International Licence.
 
 The image is named 'Australian Topographic Base Map (Web Mercator)' and is
 from the following Geoscience Australia Web Map Tile Service (WMTS):
-\url{http://gaservices.ga.gov.au/site_7/rest/services/Topographic_Base_Map_WM/MapServer}.
+\url{https://gaservices.ga.gov.au/site_7/rest/services/Topographic_Base_Map_WM/MapServer}.
 
 Code to obtain the image is in 'data-raw/ga_topo.R' at {https://github.com/hypertidy/textures}
 using the wmts package \url{https://github.com/mdsumner/wmts}.
