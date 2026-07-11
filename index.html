@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Quad Mesh Primitives and Texture Mapping for Grids">
-<meta property="og:description" content="Generate quad mesh primitives from the compact specification of a regular grid, its dimension and extent. Provides fast generation of mesh indexes and vertices, an unexpanded intermediate form (the grid edge coordinates), and a compact serializable specification for meshes that are generated on demand. Meshes are mesh3d objects as used by the rgl package, constructed without requiring any graphics engine, with support for texture mapping where an image is draped over a mesh whose density is independent of the image resolution. A C++ header library is installed so that other packages may generate mesh components via LinkingTo.">
+<meta property="og:description" content="Generate quad mesh primitives from the compact specification of a regular grid, its dimension and extent. Provides fast generation of mesh indexes and vertices, an unexpanded intermediate form (the grid edge coordinates), and a compact serializable specification for meshes that are generated on demand. Meshes are mesh3d objects as used by the rgl package, constructed without requiring any graphics engine, with support for texture mapping (Heckbert (1986) &lt;doi:10.1109/MCG.1986.276672&gt;) where an image is draped over a mesh whose density is independent of the image resolution. A C++ header library is installed so that other packages may generate mesh components via LinkingTo.">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -100,7 +100,7 @@
 <li>
 <strong>break_mesh()</strong> break the topology of a mesh (so that primitives can be free-floating, not tied to their neighbour’s vertices)</li>
 </ul>
-<p>See <a href="https://github.com/hypertidy/textures/blob/master/vignettes/design.Rmd" class="external-link">design vignette</a>.</p>
+<p>See <a href="https://hypertidy.github.io/textures/articles/design.html" class="external-link">design vignette</a>.</p>
 </div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -116,7 +116,7 @@
 <p>A Mercator raster on a single quad. Zoom in and out but no translate or pivot.</p>
 <p>Maps an image onto a quad from a PNG file. Run this code and zoom in and out.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/hypertidy/textures" class="external-link">textures</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://hypertidy.github.io/textures/" class="external-link">textures</a></span><span class="op">)</span></span>
 <span><span class="co">## create a temporary file and write an image to it</span></span>
 <span><span class="va">tfile</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".png"</span><span class="op">)</span></span>
 <span><span class="fu">png</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/png/man/writePNG.html" class="external-link">writePNG</a></span><span class="op">(</span><span class="va">ga_topo</span><span class="op">$</span><span class="va">img</span><span class="op">/</span><span class="fl">255</span>, <span class="va">tfile</span><span class="op">)</span></span>
@@ -146,7 +146,7 @@ texture map on a quad
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave</a></span><span class="op">(</span><span class="va">tfile</span>, <span class="va">g</span><span class="op">)</span></span>
 <span></span>
 <span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/hypertidy/textures" class="external-link">textures</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://hypertidy.github.io/textures/" class="external-link">textures</a></span><span class="op">)</span></span>
 <span><span class="va">quad0</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/quad.html">quad_texture</a></span><span class="op">(</span>dimension <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">92</span>, <span class="fl">102</span><span class="op">)</span>, texture <span class="op">=</span> <span class="va">tfile</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">ex</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">20</span></span>

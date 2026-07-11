@@ -90,55 +90,101 @@
 <div class="section level2">
 <h2 id="design">Design<a class="anchor" aria-label="anchor" href="#design"></a>
 </h2>
-<p>Both <strong>quad()</strong> and <strong>quad_texture()</strong>
-return ‘mesh3d’ objects that may be plotted directly with rgls
-<code><a href="https://dmurdoch.github.io/rgl/dev/reference/plot3d.html" class="external-link">plot3d()</a></code>, <code><a href="https://dmurdoch.github.io/rgl/dev/reference/shade3d.html" class="external-link">shade3d()</a></code>, <code><a href="https://dmurdoch.github.io/rgl/dev/reference/persp3d.html" class="external-link">persp3d()</a></code>,
-<code><a href="https://dmurdoch.github.io/rgl/dev/reference/shade3d.html" class="external-link">wire3d()</a></code>, or <code><a href="https://dmurdoch.github.io/rgl/dev/reference/shade3d.html" class="external-link">dot3d()</a></code>.</p>
+<p>A quad mesh on a regular grid is completely determined by a tiny
+recipe: the grid <code>dimension</code> (nx, ny cells), the
+<code>extent</code> (xmin, xmax, ymin, ymax), and the y orientation
+(<code>ydown</code>). Everything in textures is a view of that recipe at
+some level of materialization:</p>
 <ul>
-<li>All coordinates are in <code>x [0, 1]</code> and
-<code>y [0, 1]</code> and default to “y-up” (begin at 0)</li>
-<li>Quad indexes are counter-clockwise, as required by rgl (see
-<code>material3d</code> <code>back</code> argument).</li>
 <li>
-<code>ydown</code> flips the orientation so that y coordinates begin
-at 1 and count down, and ensures that quad indexes are reversed and
-correctly counter-clockwise.</li>
+<code><a href="../reference/quad_spec.html">quad_spec()</a></code> - the recipe itself, a plain serializable
+list, nothing materialized</li>
+<li>
+<code><a href="../reference/quad_index.html">quad_edges()</a></code> - the unexpanded intermediate, the x and y
+coordinates of the cell edges as two short vectors (nx + 1 and ny + 1
+values)</li>
+<li>
+<code><a href="../reference/quad_index.html">quad_index()</a></code>, <code><a href="../reference/quad_index.html">quad_vertex()</a></code> - the
+materialized components, the 4 x (nx * ny) vertex index and the expanded
+vertex coordinates</li>
+<li>
+<code><a href="../reference/quad_spec.html">quad_mesh()</a></code>, <code><a href="../reference/quad.html">quad()</a></code>,
+<code><a href="../reference/quad.html">quad_texture()</a></code> - assembled ‘mesh3d’ objects</li>
 </ul>
+<p>‘mesh3d’ objects are constructed directly (rgl is not required, it
+lives in Suggests). With rgl installed they plot with
+<code><a href="https://dmurdoch.github.io/rgl/dev/reference/plot3d.html" class="external-link">plot3d()</a></code>, <code><a href="https://dmurdoch.github.io/rgl/dev/reference/shade3d.html" class="external-link">shade3d()</a></code>, <code><a href="https://dmurdoch.github.io/rgl/dev/reference/persp3d.html" class="external-link">persp3d()</a></code>,
+<code><a href="https://dmurdoch.github.io/rgl/dev/reference/shade3d.html" class="external-link">wire3d()</a></code>, or <code><a href="https://dmurdoch.github.io/rgl/dev/reference/shade3d.html" class="external-link">dot3d()</a></code>, and
+<code><a href="https://dmurdoch.github.io/rgl/dev/reference/as.mesh3d.default.html" class="external-link">as.mesh3d()</a></code> works on a quad_spec via delayed S3
+registration. A 2D base graphics <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> method is
+included.</p>
 <div class="section level3">
-<h3 id="r-functions-using-src">R functions using src/<a class="anchor" aria-label="anchor" href="#r-functions-using-src"></a>
+<h3 id="conventions">Conventions<a class="anchor" aria-label="anchor" href="#conventions"></a>
 </h3>
 <ul>
+<li>Default extent is the unit square, “y-up” (y begins at 0).</li>
+<li>Quads are emitted in cell order, x fastest - the
+<code><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix()</a></code>/<code><a href="https://rdrr.io/r/graphics/image.html" class="external-link">image()</a></code> convention, and raster cell
+order when <code>ydown = TRUE</code>. Face-indexed values (colours,
+<code>na.rm</code>) align with grid cell order.</li>
+<li>Quad vertex winding is counter-clockwise, as required by rgl (see
+<code>material3d</code> <code>back</code> argument).</li>
 <li>
-<code><a href="../reference/break_mesh.html">break_mesh()</a></code> - removes topology from mesh3d, by
-expanding every coordinate from vertex array</li>
-<li>
-<code><a href="../reference/quad.html">quad()</a></code> generate mesh3d, a rectangular array of quads in
-the plane in 0,1</li>
-<li>
-<code><a href="../reference/quad.html">quad_texture()</a></code> - extension of quad() to include image
-texture, all geometry and texture has identical x-y plane coordinates in
-0,1</li>
+<code>ydown</code> flips the orientation so y coordinates begin at
+the top and count down, and rotates the index cycle so winding remains
+correct.</li>
+<li>Texture coordinates are the extent-normalized vertex coordinates, so
+they remain valid for any mesh whose vertices lie in the extent. Mesh
+density (<code>dimension</code>) is independent of the pixel dimension
+of a texture image: a coarse mesh may carry a full-resolution image, the
+graphics engine interpolates within each quad.</li>
+<li>Coordinate transformation belongs outside the core: the mesh vertex
+matrix is the interchange, transform it (e.g. with reproj) and the
+texture drapes unchanged.</li>
 </ul>
 </div>
 <div class="section level3">
-<h3 id="rcpp-package-using-quad-h">Rcpp package using quad.h<a class="anchor" aria-label="anchor" href="#rcpp-package-using-quad-h"></a>
+<h3 id="large-grids">Large grids<a class="anchor" aria-label="anchor" href="#large-grids"></a>
 </h3>
-<p>These are callable from R.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode c++"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>IntegerVector quad_index_cpp<span class="op">(</span>IntegerVector nx<span class="op">,</span> IntegerVector ny<span class="op">,</span> LogicalVector ydown<span class="op">)</span> </span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>NumericVector quad_vertex_cpp<span class="op">(</span>IntegerVector nx<span class="op">,</span> IntegerVector ny<span class="op">,</span> LogicalVector ydown<span class="op">,</span> LogicalVector zh<span class="op">)</span> </span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>NumericVector quad_vertex_matrix_cpp<span class="op">(</span>IntegerVector nx<span class="op">,</span> IntegerVector ny<span class="op">,</span> LogicalVector ydown<span class="op">,</span> LogicalVector zh<span class="op">)</span> </span></code></pre></div>
+<p><code><a href="../reference/quad_index.html">quad_index()</a></code> returns integer storage where it fits, and
+transparently promotes to double storage (exact for integer values to
+2^53) when the vertex count or index length exceeds the integer maximum.
+R subsetting and ‘mesh3d’ use accept double indexes natively; take care
+not to apply <code><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer()</a></code> to such an index. The compact
+spec and the edges intermediate are the escape hatch when full
+materialization is not wanted at all.</p>
+</div>
+<div class="section level3">
+<h3 id="compiled-code">Compiled code<a class="anchor" aria-label="anchor" href="#compiled-code"></a>
+</h3>
+<p>Registered via cpp11 in <code>src/quad-build.cpp</code>, callable
+from R as internal functions:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c++"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>cpp11<span class="op">::</span>integers quad_index_cpp<span class="op">(</span><span class="dt">int</span> nx<span class="op">,</span> <span class="dt">int</span> ny<span class="op">,</span> <span class="dt">bool</span> ydown<span class="op">)</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>cpp11<span class="op">::</span>doubles  quad_index_dbl_cpp<span class="op">(</span><span class="dt">double</span> nx<span class="op">,</span> <span class="dt">double</span> ny<span class="op">,</span> <span class="dt">bool</span> ydown<span class="op">)</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>cpp11<span class="op">::</span>doubles  quad_vertex_cpp<span class="op">(</span><span class="dt">int</span> nx<span class="op">,</span> <span class="dt">int</span> ny<span class="op">,</span> <span class="dt">bool</span> ydown<span class="op">,</span> <span class="dt">bool</span> zh<span class="op">)</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>cpp11<span class="op">::</span>writable<span class="op">::</span>doubles_matrix<span class="op">&lt;&gt;</span> quad_vertex_matrix_cpp<span class="op">(</span><span class="dt">int</span> nx<span class="op">,</span> <span class="dt">int</span> ny<span class="op">,</span> <span class="dt">bool</span> ydown<span class="op">,</span> <span class="dt">bool</span> zh<span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="headers">Headers<a class="anchor" aria-label="anchor" href="#headers"></a>
 </h3>
-<p><code>quad_ib</code> and <code>quad_vb</code> both return flat
-vectors, <code>quad_matrix_vb</code> returns a matrix (with optionally z
-and h).</p>
-<p><code>./inst/include/quad/quad.h</code> namespace
-<code>quad</code></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode c++"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>IntegerVector quad_ib<span class="op">(</span>IntegerVector nx<span class="op">,</span> IntegerVector ny<span class="op">,</span> LogicalVector ydown<span class="op">,</span> LogicalVector zh<span class="op">);</span></span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>NumericVector quad_vb<span class="op">(</span>IntegerVector nx<span class="op">,</span> IntegerVector ny<span class="op">,</span> LogicalVector ydown<span class="op">,</span> LogicalVector zh<span class="op">);</span></span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>NumericVector quad_matrix_vb<span class="op">(</span>IntegerVector nx<span class="op">,</span> IntegerVector ny<span class="op">,</span> LogicalVector ydown<span class="op">,</span> LogicalVector zh<span class="op">);</span></span></code></pre></div>
+<p><code>inst/include/textures/quad.h</code>, namespace
+<code>quad</code>, installed so that other packages may generate mesh
+components via <code>LinkingTo: textures</code>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c++"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>cpp11<span class="op">::</span>writable<span class="op">::</span>integers quad_ib<span class="op">(</span><span class="dt">int</span> nx<span class="op">,</span> <span class="dt">int</span> ny<span class="op">,</span> <span class="dt">bool</span> ydown<span class="op">)</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>cpp11<span class="op">::</span>writable<span class="op">::</span>doubles  quad_ib_dbl<span class="op">(</span><span class="dt">double</span> nx<span class="op">,</span> <span class="dt">double</span> ny<span class="op">,</span> <span class="dt">bool</span> ydown<span class="op">)</span></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>cpp11<span class="op">::</span>writable<span class="op">::</span>doubles  quad_vb<span class="op">(</span><span class="dt">int</span> nx<span class="op">,</span> <span class="dt">int</span> ny<span class="op">,</span> <span class="dt">bool</span> ydown<span class="op">,</span> <span class="dt">bool</span> zh<span class="op">)</span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>cpp11<span class="op">::</span>writable<span class="op">::</span>doubles_matrix<span class="op">&lt;&gt;</span> quad_matrix_vb<span class="op">(</span><span class="dt">int</span> nx<span class="op">,</span> <span class="dt">int</span> ny<span class="op">,</span> <span class="dt">bool</span> ydown<span class="op">,</span> <span class="dt">bool</span> zh<span class="op">)</span></span></code></pre></div>
+<p><code>quad_ib</code> and <code>quad_vb</code> return flat vectors (4
+values per quad, and interleaved x, y with optional constant z and
+homogeneous h), <code>quad_matrix_vb</code> returns the matrix form.</p>
+</div>
+<div class="section level3">
+<h3 id="r-reference-implementations">R reference implementations<a class="anchor" aria-label="anchor" href="#r-reference-implementations"></a>
+</h3>
+<p><code>ib_index()</code> and <code>vb_vertex()</code> in
+<code>R/quad-Rcode.R</code> are pure-R versions of the index and vertex
+generators, kept as the executable specification - the tests pin the
+compiled path to them.</p>
 </div>
 </div>
   </div>
