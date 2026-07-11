@@ -11,7 +11,7 @@
 #' @param axes draw axes (when starting a new plot), default `TRUE`
 #' @param border border colour for polygons, default 'black'
 #' @param col fill colour for polygons (line colour for segments), default `NA`
-#' @param alpha transparency in [0, 1], default 1 (opaque)
+#' @param alpha transparency in `[0, 1]`, default 1 (opaque)
 #' @param lwd line width
 #' @param lty line type
 #' @return the input mesh, invisibly, called for the side effect of graphics

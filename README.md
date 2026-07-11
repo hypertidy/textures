@@ -21,16 +21,16 @@ explicitly and explained in a single-step.
 
 Current functions are:
 
--   **png_plot3d()** - plots a PNG file in a 3D scene
--   **quad()** create a simple mesh3d object with 1 or more quad
-    primitives
--   **quad_texture()** create a mesh3d object with 1 or more quads, and
-    the texture coordinates and file path to a PNG file
--   **set_scene()** a convenience wrapper to rgl scene settings, it
-    makes the scene look “straight-down” and locks pan and tilt so the
-    rgl device like a zoom-in/zoom-out 2D displaye
--   **break_mesh()** break the topology of a mesh (so that primitives
-    can be free-floating, not tied to their neighbour’s vertices)
+- **png_plot3d()** - plots a PNG file in a 3D scene
+- **quad()** create a simple mesh3d object with 1 or more quad
+  primitives
+- **quad_texture()** create a mesh3d object with 1 or more quads, and
+  the texture coordinates and file path to a PNG file
+- **set_scene()** a convenience wrapper to rgl scene settings, it makes
+  the scene look “straight-down” and locks pan and tilt so the rgl
+  device like a zoom-in/zoom-out 2D displaye
+- **break_mesh()** break the topology of a mesh (so that primitives can
+  be free-floating, not tied to their neighbour’s vertices)
 
 See [design
 vignette](https://github.com/hypertidy/textures/blob/master/vignettes/design.Rmd).
@@ -69,7 +69,10 @@ rgl::plot3d(quad0, specular = "black")
 set_scene()  ## this sets the plot up to appear like a 2D image
 ```
 
-![texture map on a quad](man/figures/readme_ga000.png)
+<figure>
+<img src="man/figures/readme_ga000.png" alt="texture map on a quad" />
+<figcaption aria-hidden="true">texture map on a quad</figcaption>
+</figure>
 
 Maps are fun but R is not just about *geography*.
 
@@ -110,19 +113,22 @@ rgl::aspect3d(1, 1, .3)
 par3d(windowRect  = c(0, 0, 1024, 1024))
 ```
 
-![texture map on a quad](man/figures/readme_gg000.png)
+<figure>
+<img src="man/figures/readme_gg000.png" alt="texture map on a quad" />
+<figcaption aria-hidden="true">texture map on a quad</figcaption>
+</figure>
 
 ## Re-map projections
 
 *see ./rough-examples.R* WIP
 
--   **rough-examples#1**: See Mercator map above.
--   **rough-examples#2.**: Illustrate folly of low-density primitives
-    for reprojection
--   **rough-examples#3.**: Create a generalized surface in arbitrary map
-    projection and remap the image losslessly
--   **rough-examples#4.**: Explore the use of primitive shapes for
-    placing image fragments arbitrarily
+- **rough-examples#1**: See Mercator map above.
+- **rough-examples#2.**: Illustrate folly of low-density primitives for
+  reprojection
+- **rough-examples#3.**: Create a generalized surface in arbitrary map
+  projection and remap the image losslessly
+- **rough-examples#4.**: Explore the use of primitive shapes for placing
+  image fragments arbitrarily
 
 ------------------------------------------------------------------------
 

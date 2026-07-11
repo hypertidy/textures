@@ -20,7 +20,6 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
 Imports: 
     graphics,
     grDevices
@@ -37,3 +36,4 @@ LinkingTo:
 VignetteBuilder: knitr
 URL: https://github.com/hypertidy/textures, https://hypertidy.github.io/textures/
 BugReports: https://github.com/hypertidy/textures/issues
+Config/roxygen2/version: 8.0.0

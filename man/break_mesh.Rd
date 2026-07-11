@@ -21,7 +21,7 @@ that are geometrically independent. (One day I'll find a way to talk
 about this that's not garble.)
 }
 \examples{
-(mesh <- quad(depth = 3))
+(mesh <- quad(c(3, 3)))
 ## same number of primitives, more vertices (every coordinate)
 break_mesh(mesh)
 }
