@@ -1,10 +1,10 @@
-#' un mesh
+#' Break mesh
 #'
 #' Break the topology of a mesh by expanding all vertices.
 #'
-#' Details ... rgl is inherently _topological_, but we can have primitives
-#' that are geometrically independent. (One day I'll find a way to talk
-#' about this that's not garble.)
+#' Data in a mesh and in rgl is inherently _topological_, but we can have primitives
+#' that are geometrically independent.
+#'
 #' @param x mesh3d, from e.g. `quad()`
 #'
 #' @return mesh3d

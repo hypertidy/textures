@@ -2,7 +2,7 @@
 % Please edit documentation in R/break-mesh.R
 \name{break_mesh}
 \alias{break_mesh}
-\title{un mesh}
+\title{Break mesh}
 \usage{
 break_mesh(x)
 }
@@ -16,9 +16,8 @@ mesh3d
 Break the topology of a mesh by expanding all vertices.
 }
 \details{
-Details ... rgl is inherently \emph{topological}, but we can have primitives
-that are geometrically independent. (One day I'll find a way to talk
-about this that's not garble.)
+Data in a mesh and in rgl is inherently \emph{topological}, but we can have primitives
+that are geometrically independent.
 }
 \examples{
 (mesh <- quad(c(3, 3)))
