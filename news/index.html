@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">textures</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.0.9023</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0</span>
       </span>
     </div>
 
@@ -38,7 +38,13 @@
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
-      </ul><ul class="nav navbar-nav navbar-right"></ul></div><!--/.nav-collapse -->
+      </ul><ul class="nav navbar-nav navbar-right"><li>
+  <a href="https://github.com/hypertidy/textures/" class="external-link">
+    <span class="fab fa-github fa-lg"></span>
+
+  </a>
+</li>
+      </ul></div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
 
@@ -48,9 +54,20 @@
   <div class="col-md-9 contents">
     <div class="page-header">
       <h1 data-toc-skip>Changelog <small></small></h1>
-
+      <small>Source: <a href="https://github.com/hypertidy/textures/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.1.0" id="textures-010">textures 0.1.0<a class="anchor" aria-label="anchor" href="#textures-010"></a></h2>
+<ul><li><p>Preparing for CRAN release, textures is now the core mesh-generation package that quadmesh will import.</p></li>
+<li><p>The quad header library is vendored into <code>inst/include/textures/quad.h</code>, removing the GitHub-only ‘quad’ dependency. Other packages may use it via <code>LinkingTo: textures</code>.</p></li>
+<li><p>Behaviour change: quads are now emitted in cell order, x fastest (the <code><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix()</a></code>/<code><a href="https://rdrr.io/r/graphics/image.html" class="external-link">image()</a></code> convention, and raster cell order when <code>ydown = TRUE</code>). Previously the C++ path emitted quads y fastest. Vertices are unchanged; only the column order of <code>ib</code> (and so face-value alignment) changes.</p></li>
+<li><p>New core primitives <code><a href="../reference/quad_index.html">quad_index()</a></code>, <code><a href="../reference/quad_index.html">quad_edges()</a></code>, <code><a href="../reference/quad_index.html">quad_vertex()</a></code>. <code><a href="../reference/quad_index.html">quad_edges()</a></code> is the unexpanded intermediate form (the grid margin coordinates). <code><a href="../reference/quad_index.html">quad_index()</a></code> transparently returns double storage for grids whose vertex count or index length exceeds the integer maximum.</p></li>
+<li><p>New compact specification form <code><a href="../reference/quad_spec.html">quad_spec()</a></code>, a plain serializable recipe for a generatable mesh, with <code><a href="../reference/quad_spec.html">quad_mesh()</a></code> to materialize it as mesh3d. With rgl installed, <code><a href="https://dmurdoch.github.io/rgl/dev/reference/as.mesh3d.default.html" class="external-link">as.mesh3d()</a></code> also works on a quad_spec (delayed S3 registration).</p></li>
+<li><p>rgl and scales are no longer Imports: mesh3d objects are constructed directly, rgl (in Suggests) is only needed for 3D display. <code><a href="../reference/set_scene.html">set_scene()</a></code> and <code><a href="../reference/png_plot3d.html">png_plot3d()</a></code> require rgl at runtime.</p></li>
+<li><p><code><a href="../reference/plot.mesh3d.html">plot.mesh3d()</a></code> is rewritten in base graphics (previously used grid and gridBase, which were not declared dependencies); its triangle branch indexing bug is fixed.</p></li>
+<li><p><code><a href="../reference/quad.html">quad_texture()</a></code> with an empty texture path now warns ‘no texture file given’ rather than ‘texture file given does not exist’.</p></li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.0.0.9020" id="textures-0009020">textures 0.0.0.9020<a class="anchor" aria-label="anchor" href="#textures-0009020"></a></h2>
 <ul><li><p>quad.h now provides matrix version of vertex table, with or without z-h.</p></li>

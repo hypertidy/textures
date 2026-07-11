@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">textures</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.0.9023</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0</span>
       </span>
     </div>
 
@@ -38,7 +38,13 @@
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
-      </ul><ul class="nav navbar-nav navbar-right"></ul></div><!--/.nav-collapse -->
+      </ul><ul class="nav navbar-nav navbar-right"><li>
+  <a href="https://github.com/hypertidy/textures/" class="external-link">
+    <span class="fab fa-github fa-lg"></span>
+
+  </a>
+</li>
+      </ul></div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
 
@@ -48,7 +54,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>un mesh</h1>
-
+    <small class="dont-index">Source: <a href="https://github.com/hypertidy/textures/blob/main/R/break-mesh.R" class="external-link"><code>R/break-mesh.R</code></a></small>
     <div class="hidden name"><code>break_mesh.Rd</code></div>
     </div>
 
@@ -81,11 +87,11 @@ about this that's not garble.)</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="op">(</span><span class="va">mesh</span> <span class="op">&lt;-</span> <span class="fu"><a href="quad.html">quad</a></span><span class="op">(</span>depth <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  mesh3d object with 4 vertices, 1 quads.</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="op">(</span><span class="va">mesh</span> <span class="op">&lt;-</span> <span class="fu"><a href="quad.html">quad</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  mesh3d object with 16 vertices, 9 quads.</span>
 <span class="r-in"><span><span class="co">## same number of primitives, more vertices (every coordinate)</span></span></span>
 <span class="r-in"><span><span class="fu">break_mesh</span><span class="op">(</span><span class="va">mesh</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  mesh3d object with 4 vertices, 1 quads.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  mesh3d object with 36 vertices, 9 quads.</span>
 </code></pre></div>
     </div>
   </div>
