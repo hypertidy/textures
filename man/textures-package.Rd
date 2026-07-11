@@ -25,7 +25,8 @@ belongs outside this package - the vertex matrix is the interchange.
 Useful links:
 \itemize{
   \item \url{https://hypertidy.github.io/textures/}
-  \item \url{https://github.com/hypertidy/texturesBugReports:} \url{https://github.com/hypertidy/textures/issues}
+  \item \url{https://github.com/hypertidy/textures}
+  \item Report bugs at \url{https://github.com/hypertidy/textures/issues}
 }
 
 }
