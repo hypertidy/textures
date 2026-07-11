@@ -1,4 +1,4 @@
-# un mesh
+# Break mesh
 
 Break the topology of a mesh by expanding all vertices.
 
@@ -21,9 +21,8 @@ mesh3d
 
 ## Details
 
-Details ... rgl is inherently *topological*, but we can have primitives
-that are geometrically independent. (One day I'll find a way to talk
-about this that's not garble.)
+Data in a mesh and in rgl is inherently *topological*, but we can have
+primitives that are geometrically independent.
 
 ## Examples
 

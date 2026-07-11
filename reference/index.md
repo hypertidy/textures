@@ -26,7 +26,7 @@ Index, edges (unexpanded), and vertices from dimension and extent
   [`segs()`](https://hypertidy.github.io/textures/reference/quad.md) :
   Quad canvas
 - [`break_mesh()`](https://hypertidy.github.io/textures/reference/break_mesh.md)
-  : un mesh
+  : Break mesh
 
 ## Plotting
 
