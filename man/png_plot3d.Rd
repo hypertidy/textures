@@ -19,6 +19,8 @@ as a side effect creates a 3D interactive plot
 Plot a PNG bitmap in 3D
 }
 \examples{
+\dontshow{if (interactive() && requireNamespace("rgl", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 file <- system.file("extdata/Rlogo.png", package = "textures")
 png_plot3d(file)
+\dontshow{\}) # examplesIf}
 }

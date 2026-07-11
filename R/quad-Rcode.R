@@ -24,9 +24,10 @@ ib_index <- function(nx = 1, ny = nx, ydown = FALSE) {
                         rep(seq(0, length = ny, by = nc1), each = 4L * nx)))
   out <- matrix(ind0, nrow = 4L)
   if (ydown) {
-    ## we have to reverse the order so they are anti-clockwise
+    ## rotate the cycle so winding is anti-clockwise for y-down
+    ## (matches quad::quad_ib in inst/include/textures/quad.h)
     ## can vis this with material3d(back = "lines")
-    out <- out[4:1, , drop = FALSE]
+    out <- out[c(3L, 4L, 1L, 2L), , drop = FALSE]
   }
   out
 }
@@ -43,8 +44,7 @@ vb_vertex <- function(nx = 1L, ny = nx, ydown = FALSE) {
 }
 quad_ <- function(nx = 1, ny = nx, ydown = FALSE) {
   xy <- vb_vertex(nx, ny, ydown = ydown)
-  rgl::qmesh3d(rbind(t(xy), z = 0, h = 1),
-               ib_index(nx, ny, ydown = ydown),
-               material = list(color = "#FFFFFFFF"))
+  .mesh3d_quads(rbind(t(xy), z = 0, h = 1),
+                ib_index(nx, ny, ydown = ydown))
 }
 

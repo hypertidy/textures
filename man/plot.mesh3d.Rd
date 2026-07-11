@@ -19,10 +19,33 @@
 }
 \arguments{
 \item{x}{mesh3d object (with any or all of quads, triangles, segments)}
+
+\item{...}{ignored}
+
+\item{asp}{aspect ratio, default 1}
+
+\item{add}{add to an existing plot, default \code{FALSE}}
+
+\item{axes}{draw axes (when starting a new plot), default \code{TRUE}}
+
+\item{border}{border colour for polygons, default 'black'}
+
+\item{col}{fill colour for polygons (line colour for segments), default \code{NA}}
+
+\item{alpha}{transparency in \verb{[0, 1]}, default 1 (opaque)}
+
+\item{lwd}{line width}
+
+\item{lty}{line type}
 }
 \value{
-nothing, called for side effect of graphics
+the input mesh, invisibly, called for the side effect of graphics
 }
 \description{
-Plot (2D) for mesh3d
+Draws the x-y geometry of a mesh in base graphics: quads (\code{ib}) and
+triangles (\code{it}) as polygons, segments (\code{is}) as lines, and bare
+vertices as points when no primitives are present.
+}
+\examples{
+plot(quad(c(5, 4), extent = c(0, 10, 0, 8)))
 }

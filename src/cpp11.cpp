@@ -6,30 +6,38 @@
 #include <R_ext/Visibility.h>
 
 // quad-build.cpp
-integers quad_index_cpp(integers nx, integers ny, logicals ydown);
+cpp11::integers quad_index_cpp(int nx, int ny, bool ydown);
 extern "C" SEXP _textures_quad_index_cpp(SEXP nx, SEXP ny, SEXP ydown) {
   BEGIN_CPP11
-    return cpp11::as_sexp(quad_index_cpp(cpp11::as_cpp<cpp11::decay_t<integers>>(nx), cpp11::as_cpp<cpp11::decay_t<integers>>(ny), cpp11::as_cpp<cpp11::decay_t<logicals>>(ydown)));
+    return cpp11::as_sexp(quad_index_cpp(cpp11::as_cpp<cpp11::decay_t<int>>(nx), cpp11::as_cpp<cpp11::decay_t<int>>(ny), cpp11::as_cpp<cpp11::decay_t<bool>>(ydown)));
   END_CPP11
 }
 // quad-build.cpp
-doubles quad_vertex_cpp(integers nx, integers ny, logicals ydown, logicals zh);
+cpp11::doubles quad_index_dbl_cpp(double nx, double ny, bool ydown);
+extern "C" SEXP _textures_quad_index_dbl_cpp(SEXP nx, SEXP ny, SEXP ydown) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(quad_index_dbl_cpp(cpp11::as_cpp<cpp11::decay_t<double>>(nx), cpp11::as_cpp<cpp11::decay_t<double>>(ny), cpp11::as_cpp<cpp11::decay_t<bool>>(ydown)));
+  END_CPP11
+}
+// quad-build.cpp
+cpp11::doubles quad_vertex_cpp(int nx, int ny, bool ydown, bool zh);
 extern "C" SEXP _textures_quad_vertex_cpp(SEXP nx, SEXP ny, SEXP ydown, SEXP zh) {
   BEGIN_CPP11
-    return cpp11::as_sexp(quad_vertex_cpp(cpp11::as_cpp<cpp11::decay_t<integers>>(nx), cpp11::as_cpp<cpp11::decay_t<integers>>(ny), cpp11::as_cpp<cpp11::decay_t<logicals>>(ydown), cpp11::as_cpp<cpp11::decay_t<logicals>>(zh)));
+    return cpp11::as_sexp(quad_vertex_cpp(cpp11::as_cpp<cpp11::decay_t<int>>(nx), cpp11::as_cpp<cpp11::decay_t<int>>(ny), cpp11::as_cpp<cpp11::decay_t<bool>>(ydown), cpp11::as_cpp<cpp11::decay_t<bool>>(zh)));
   END_CPP11
 }
 // quad-build.cpp
-writable::doubles_matrix<> quad_vertex_matrix_cpp(integers nx, integers ny, logicals ydown, logicals zh);
+cpp11::writable::doubles_matrix<> quad_vertex_matrix_cpp(int nx, int ny, bool ydown, bool zh);
 extern "C" SEXP _textures_quad_vertex_matrix_cpp(SEXP nx, SEXP ny, SEXP ydown, SEXP zh) {
   BEGIN_CPP11
-    return cpp11::as_sexp(quad_vertex_matrix_cpp(cpp11::as_cpp<cpp11::decay_t<integers>>(nx), cpp11::as_cpp<cpp11::decay_t<integers>>(ny), cpp11::as_cpp<cpp11::decay_t<logicals>>(ydown), cpp11::as_cpp<cpp11::decay_t<logicals>>(zh)));
+    return cpp11::as_sexp(quad_vertex_matrix_cpp(cpp11::as_cpp<cpp11::decay_t<int>>(nx), cpp11::as_cpp<cpp11::decay_t<int>>(ny), cpp11::as_cpp<cpp11::decay_t<bool>>(ydown), cpp11::as_cpp<cpp11::decay_t<bool>>(zh)));
   END_CPP11
 }
 
 extern "C" {
 static const R_CallMethodDef CallEntries[] = {
     {"_textures_quad_index_cpp",         (DL_FUNC) &_textures_quad_index_cpp,         3},
+    {"_textures_quad_index_dbl_cpp",     (DL_FUNC) &_textures_quad_index_dbl_cpp,     3},
     {"_textures_quad_vertex_cpp",        (DL_FUNC) &_textures_quad_vertex_cpp,        4},
     {"_textures_quad_vertex_matrix_cpp", (DL_FUNC) &_textures_quad_vertex_matrix_cpp, 4},
     {NULL, NULL, 0}

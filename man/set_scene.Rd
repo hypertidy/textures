@@ -46,6 +46,8 @@ from rg's default to put the light source forwards (y+) from the viewer when
 looking straight down
 }
 \examples{
+\dontshow{if (interactive() && requireNamespace("rgl", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 ## see README and in-dev examples in rough-examples.R
 rgl::plot3d(rnorm(10), rnorm(10), rnorm(1)); set_scene()
+\dontshow{\}) # examplesIf}
 }
