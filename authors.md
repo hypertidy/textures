@@ -8,7 +8,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/hypertidy/texturesBugReports:/blob/main/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/hypertidy/textures/blob/main/DESCRIPTION)
 
 Sumner M (2026). *textures: Quad Mesh Primitives and Texture Mapping for
 Grids*. R package version 0.1.0,
