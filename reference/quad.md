@@ -6,11 +6,11 @@ form of `quad_mesh(quad_spec(...))`.
 ## Usage
 
 ``` r
-quad(dimension = c(1L, 1L), extent = NULL, ydown = FALSE, ...)
+quad(dimension = c(1L, 1L), extent = NULL, ydown = FALSE)
 
 quad_texture(dimension = c(1L, 1L), extent = NULL, ydown = FALSE, texture = "")
 
-segs(dimension = c(1L, 1L), extent = NULL, ydown = FALSE, ...)
+segs(dimension = c(1L, 1L), extent = NULL, ydown = FALSE)
 ```
 
 ## Arguments
@@ -28,10 +28,6 @@ segs(dimension = c(1L, 1L), extent = NULL, ydown = FALSE, ...)
 - ydown:
 
   should y-coordinate be counted from top (default `FALSE`)
-
-- ...:
-
-  used only to warn about old usage
 
 - texture:
 

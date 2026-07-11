@@ -28,7 +28,8 @@ Useful links:
 
 - <https://hypertidy.github.io/textures/>
 
-- Report bugs at <https://github.com/hypertidy/textures/issues>
+- <https://github.com/hypertidy/texturesBugReports:>
+  <https://github.com/hypertidy/textures/issues>
 
 ## Author
 
