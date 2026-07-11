@@ -26,8 +26,12 @@ A list with an array, a numeric vector, and a character vector:
 
 ## Details
 
-(It's web Mercator, aka 'EPSG:3857'. We've kept the proj string because
-it's the easiest to use atm - May 2020.)
+This dataset exists to demonstrate the full pattern: write `img` to PNG,
+texture it with `[quad_texture()]` using extent, and transform the mesh
+vertices with the crs - the image itself is never resampled.
+
+(The image is web Mercator, aka 'EPSG:3857'. We've kept the proj string
+because it's the easiest way to modify a projection.)
 
 ## Provenance
 

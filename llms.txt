@@ -157,9 +157,9 @@ Index, edges (unexpanded), and vertices from dimension and extent
 - [`quad()`](https://hypertidy.github.io/textures/reference/quad.md)
   [`quad_texture()`](https://hypertidy.github.io/textures/reference/quad.md)
   [`segs()`](https://hypertidy.github.io/textures/reference/quad.md) :
-  Quad canvas
+  Quad mesh objects
 - [`break_mesh()`](https://hypertidy.github.io/textures/reference/break_mesh.md)
-  : Break mesh
+  : Break mesh, expand vertex instances
 
 ## Plotting
 

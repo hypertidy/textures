@@ -84,6 +84,15 @@ dimension of any `texture` image: a coarse mesh may carry a
 full-resolution image, the graphics engine interpolates within each
 quad.
 
+A spec can be stored, serialized, and sent where a materialized mesh
+cannot sensibly be - materialization is deferred to the consumer.
+
+## See also
+
+Other textures:
+[`break_mesh()`](https://hypertidy.github.io/textures/reference/break_mesh.md),
+[`quad()`](https://hypertidy.github.io/textures/reference/quad.md)
+
 ## Examples
 
 ``` r

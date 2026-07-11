@@ -1,6 +1,7 @@
-# Quad canvas
+# Quad mesh objects
 
-Create a simple quad mesh3d object
+Create a simple quad mesh3d object. `quad()` is the eager convenience
+form of `quad_mesh(quad_spec(...))`.
 
 ## Usage
 
@@ -48,7 +49,7 @@ vertices, this is defined in the rgl package by
 and has elements `vb` (the homogeneous coordinates 4xn) and `ib` (the
 quad index 4xn).
 
-Use `seg()` to create a mesh3d object with segment indexes, exactly
+Use `segs()` to create a mesh3d object with segment indexes, exactly
 analogous to the mesh created by `quad()` just only containing the quad
 edges/segments - note that segments are unique.
 
@@ -57,15 +58,11 @@ The `meshColor` is currently hardcoded as 'vertices'.
 Use `quad_texture()` to create a mesh3d object additionally with
 `texcoords` and `texture` properties.
 
-## Deprecation note
+## See also
 
-Note that an early version used arguments 'depth' (to control
-[`rgl::subdivision3d()`](https://dmurdoch.github.io/rgl/dev/reference/subdivision3d.html)),
-'tex' to indicate that texture should be included, 'texfile' a link to
-the texture file path, and 'unmesh' to remove topology by expanding the
-vertices . Please now use `quad_texture()` for textures, and `dimension`
-argument (length 1 or 2), and
-[`break_mesh()`](https://hypertidy.github.io/textures/reference/break_mesh.md).
+Other textures:
+[`break_mesh()`](https://hypertidy.github.io/textures/reference/break_mesh.md),
+[`quad_spec()`](https://hypertidy.github.io/textures/reference/quad_spec.md)
 
 ## Examples
 

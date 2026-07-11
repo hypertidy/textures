@@ -35,7 +35,7 @@ quad_vertex(dimension, extent = NULL, ydown = FALSE)
 `quad_index()` a 4-row matrix of vertex indexes (integer, or double for
 very large grids), `quad_edges()` a list with `x` and `y` edge
 coordinate vectors, `quad_vertex()` a 2-column matrix of vertex
-coordinates
+coordinates @family textures
 
 ## Details
 
