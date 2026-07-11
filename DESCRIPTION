@@ -35,6 +35,7 @@ Suggests:
 LinkingTo: 
     cpp11
 VignetteBuilder: knitr
-URL: https://hypertidy.github.io/textures/, https://github.com/hypertidy/texturesBugReports: https://github.com/hypertidy/textures/issues
+URL: https://hypertidy.github.io/textures/, https://github.com/hypertidy/textures
+BugReports: https://github.com/hypertidy/textures/issues
 Config/roxygen2/version: 8.0.0
 Language: en-US
