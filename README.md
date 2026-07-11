@@ -10,7 +10,9 @@
 status](https://www.r-pkg.org/badges/version/textures)](https://CRAN.R-project.org/package=textures)
 <!-- badges: end -->
 
-The goal of textures is to utilize texture mapping in rgl to work with
+The goal of textures is to generate quad mesh primitives from the
+compact specification of a regular grid, its dimension and extent. The
+original motivation was to use texture mapping in graphics to work with
 images in different coordinate systems and mapped onto arbitrary shapes.
 
 We aim to illustrate texture mapping capability in rgl with *core
