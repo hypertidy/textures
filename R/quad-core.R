@@ -68,6 +68,7 @@
 #'  double for very large grids), `quad_edges()` a list with `x` and `y`
 #'  edge coordinate vectors, `quad_vertex()` a 2-column matrix of vertex
 #'  coordinates
+#'  @family textures
 #' @export
 #' @examples
 #' quad_index(c(2, 3))

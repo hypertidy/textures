@@ -2,7 +2,7 @@
 % Please edit documentation in R/break-mesh.R
 \name{break_mesh}
 \alias{break_mesh}
-\title{Break mesh}
+\title{Break mesh, expand vertex instances}
 \usage{
 break_mesh(x)
 }
@@ -16,11 +16,21 @@ mesh3d
 Break the topology of a mesh by expanding all vertices.
 }
 \details{
-Data in a mesh and in rgl is inherently \emph{topological}, but we can have primitives
-that are geometrically independent.
+Data in a mesh and in rgl is inherently \emph{topological}, but we can have
+primitives that independent, out of an original mesh. Expanding every vertex
+makes primitives geometrically independent, so attributes (colours, texture
+coordinates) can be constant per face rather than interpolated between shared
+vertices - the \emph{discrete} rendering of a \emph{continuous} mesh, at the cost of
+four times the vertices. This is the \code{dquadmesh} idea from quadmesh package.
 }
 \examples{
 (mesh <- quad(c(3, 3)))
 ## same number of primitives, more vertices (every coordinate)
 break_mesh(mesh)
 }
+\seealso{
+Other textures:
+\code{\link[=quad]{quad()}},
+\code{\link[=quad_spec]{quad_spec()}}
+}
+\concept{textures}

@@ -27,6 +27,7 @@ is the unit square}
 double for very large grids), \code{quad_edges()} a list with \code{x} and \code{y}
 edge coordinate vectors, \code{quad_vertex()} a 2-column matrix of vertex
 coordinates
+@family textures
 }
 \description{
 Generate the components of a quad mesh from the compact specification of

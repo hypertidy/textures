@@ -19,8 +19,12 @@ ga_topo
 Image of Australia as a map, its extent, and map projection.
 }
 \details{
-(It's web Mercator, aka 'EPSG:3857'. We've kept the proj string because
-it's the easiest to use atm - May 2020.)
+This dataset exists to demonstrate the full pattern: write \code{img} to PNG,
+texture it with \verb{[quad_texture()]} using extent, and transform the mesh
+vertices with the crs - the image itself is never resampled.
+
+(The image is web Mercator, aka 'EPSG:3857'. We've kept the proj string because
+it's the easiest way to modify a projection.)
 }
 \section{Provenance}{
 

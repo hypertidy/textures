@@ -4,9 +4,22 @@
 \name{textures-package}
 \alias{textures}
 \alias{textures-package}
-\title{textures: Quad Mesh Primitives and Texture Mapping for Grids}
+\title{textures: quad mesh primitives and texture mapping for grids}
 \description{
-Generate quad mesh primitives from the compact specification of a regular grid, its dimension and extent. Provides fast generation of mesh indexes and vertices, an unexpanded intermediate form (the grid edge coordinates), and a compact serializable specification for meshes that are generated on demand. Meshes are 'mesh3d' objects as used by the 'rgl' package, constructed without requiring any graphics engine, with support for texture mapping (Heckbert (1986) \doi{10.1109/MCG.1986.276672}) where an image is draped over a mesh whose density is independent of the image resolution. A C++ header library is installed so that other packages may generate mesh components via 'LinkingTo'.
+A quad mesh on a regular grid is completely determined by a tiny
+recipe: the grid dimension, its extent, and the y orientation.
+textures provides that recipe at four levels of materialization:
+the recipe itself (\code{\link[=quad_spec]{quad_spec()}}), the unexpanded cell edge
+coordinates (\code{\link[=quad_edges]{quad_edges()}}), the materialized index and vertices
+(\code{\link[=quad_index]{quad_index()}}, \code{\link[=quad_vertex]{quad_vertex()}}), and assembled 'mesh3d' objects
+(\code{\link[=quad_mesh]{quad_mesh()}}, \code{\link[=quad]{quad()}}, \code{\link[=quad_texture]{quad_texture()}}).
+}
+\details{
+Texture mapping is the motivating use: an image draped over a mesh
+is resampled by the graphics engine, not by the data pipeline, so
+mesh density is independent of image resolution and coordinate
+transformation is a vertex operation only. Transformation itself
+belongs outside this package - the vertex matrix is the interchange.
 }
 \seealso{
 Useful links:

@@ -4,7 +4,7 @@
 \alias{quad}
 \alias{quad_texture}
 \alias{segs}
-\title{Quad canvas}
+\title{Quad mesh objects}
 \usage{
 quad(dimension = c(1L, 1L), extent = NULL, ydown = FALSE, ...)
 
@@ -27,14 +27,15 @@ segs(dimension = c(1L, 1L), extent = NULL, ydown = FALSE, ...)
 mesh3d with quads and material texture settings as per inputs
 }
 \description{
-Create a simple quad mesh3d object
+Create a simple quad mesh3d object. \code{quad()} is the eager
+convenience form of \code{quad_mesh(quad_spec(...))}.
 }
 \details{
 Use \code{quad()} to create a mesh3d object with quad indexes to the vertices, this is
 defined in the rgl package by \link[rgl:qmesh3d]{qmesh3d()} and has elements
 \code{vb} (the homogeneous coordinates 4xn) and \code{ib} (the quad index 4xn).
 
-Use \code{seg()} to create a mesh3d object with segment indexes, exactly analogous to the mesh created by
+Use \code{segs()} to create a mesh3d object with segment indexes, exactly analogous to the mesh created by
 \code{quad()} just only containing the quad edges/segments - note that segments are unique.
 
 The \code{meshColor} is currently hardcoded as 'vertices'.
@@ -42,17 +43,6 @@ The \code{meshColor} is currently hardcoded as 'vertices'.
 Use \code{quad_texture()} to create a mesh3d object additionally with \code{texcoords} and
 \code{texture} properties.
 }
-\section{Deprecation note}{
-
-
-Note that an early version used arguments 'depth' (to control \code{\link[rgl:subdivision3d]{rgl::subdivision3d()}}),
-'tex' to indicate that texture should be included, 'texfile' a link to the texture file path,
-and 'unmesh' to remove topology by expanding the vertices
-.
-Please now use \code{\link[=quad_texture]{quad_texture()}} for textures, and \code{dimension} argument (length 1 or 2),
-and \code{\link[=break_mesh]{break_mesh()}}.
-}
-
 \examples{
 qm <- quad()
 ## orientation is low to high, x then y
@@ -64,3 +54,9 @@ if (requireNamespace("rgl")) {
  rgl::plot3d(qm)
  }
 }
+\seealso{
+Other textures:
+\code{\link[=break_mesh]{break_mesh()}},
+\code{\link[=quad_spec]{quad_spec()}}
+}
+\concept{textures}

@@ -68,6 +68,9 @@ The mesh density given by \code{dimension} is independent of the pixel
 dimension of any \code{texture} image: a coarse mesh may carry a
 full-resolution image, the graphics engine interpolates within each
 quad.
+
+A spec can be stored, serialized, and sent where a materialized mesh cannot
+sensibly be - materialization is deferred to the consumer.
 }
 \examples{
 spec <- quad_spec(c(20, 10), extent = c(100, 160, -60, -30))
@@ -75,3 +78,9 @@ spec
 mesh <- quad_mesh(spec)
 str(mesh$vb)
 }
+\seealso{
+Other textures:
+\code{\link[=break_mesh]{break_mesh()}},
+\code{\link[=quad]{quad()}}
+}
+\concept{textures}

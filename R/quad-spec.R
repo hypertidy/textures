@@ -19,6 +19,9 @@
 #' full-resolution image, the graphics engine interpolates within each
 #' quad.
 #'
+#' A spec can be stored, serialized, and sent where a materialized mesh cannot
+#' sensibly be - materialization is deferred to the consumer.
+#'
 #' @param dimension number of cells in the grid (nx, ny), a single value
 #'  is recycled
 #' @param extent extent of the grid `c(xmin, xmax, ymin, ymax)`, default
@@ -34,6 +37,7 @@
 #' @return `quad_spec()` a list with class 'quad_spec', `quad_mesh()` a
 #'  mesh3d object, the print method returns its input invisibly
 #' @export
+#' @family textures
 #' @examples
 #' spec <- quad_spec(c(20, 10), extent = c(100, 160, -60, -30))
 #' spec

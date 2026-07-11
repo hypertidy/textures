@@ -13,30 +13,22 @@
 }
 
 
-#' Quad canvas
+#' Quad mesh objects
 #'
-#' Create a simple quad mesh3d object
+#' Create a simple quad mesh3d object. `quad()` is the eager
+#' convenience form of `quad_mesh(quad_spec(...))`.
 #'
 #' Use `quad()` to create a mesh3d object with quad indexes to the vertices, this is
 #' defined in the rgl package by [qmesh3d()][rgl::qmesh3d] and has elements
 #' `vb` (the homogeneous coordinates 4xn) and `ib` (the quad index 4xn).
 #'
-#' Use `seg()` to create a mesh3d object with segment indexes, exactly analogous to the mesh created by
+#' Use `segs()` to create a mesh3d object with segment indexes, exactly analogous to the mesh created by
 #' `quad()` just only containing the quad edges/segments - note that segments are unique.
 #'
 #' The `meshColor` is currently hardcoded as 'vertices'.
 #'
 #' Use `quad_texture()` to create a mesh3d object additionally with `texcoords` and
 #' `texture` properties.
-#'
-#' @section Deprecation note:
-#'
-#' Note that an early version used arguments 'depth' (to control [rgl::subdivision3d()]),
-#' 'tex' to indicate that texture should be included, 'texfile' a link to the texture file path,
-#' and 'unmesh' to remove topology by expanding the vertices
-#' .
-#' Please now use [quad_texture()] for textures, and `dimension` argument (length 1 or 2),
-#' and [break_mesh()].
 #'
 #' @param dimension dimensions of mesh (using [matrix()] and [image()] orientation)
 #' @param extent optional extent of mesh xmin, xmax, ymin, ymax
@@ -45,6 +37,7 @@
 #' @param ... used only to warn about old usage
 #' @return mesh3d with quads and material texture settings as per inputs
 #' @export
+#' @family textures
 #' @aliases quad_texture segs
 #' @examples
 #' qm <- quad()

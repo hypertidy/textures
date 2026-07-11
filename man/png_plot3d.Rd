@@ -16,7 +16,15 @@ returns a mesh3d with 1 quad and the image file textured to it,
 as a side effect creates a 3D interactive plot
 }
 \description{
-Plot a PNG bitmap in 3D
+This is the core idea of the textures package in minimum form: a single quad
+carrying a full-resolution image, with all interpolation done by the graphics
+engine.
+}
+\details{
+Consider that the vertices on each corner can be changed by value arbitrarily, this
+will affect the way this will be represented geometrically and visually. If
+the internal mesh of the quad is denser, this provides automatic image reprojection
+work entirely by the graphics engine.
 }
 \examples{
 \dontshow{if (interactive() && requireNamespace("rgl", quietly = TRUE)) withAutoprint(\{ # examplesIf}

@@ -1,5 +1,21 @@
+#' textures: quad mesh primitives and texture mapping for grids
+#'
+#' A quad mesh on a regular grid is completely determined by a tiny
+#' recipe: the grid dimension, its extent, and the y orientation.
+#' textures provides that recipe at four levels of materialization:
+#' the recipe itself ([quad_spec()]), the unexpanded cell edge
+#' coordinates ([quad_edges()]), the materialized index and vertices
+#' ([quad_index()], [quad_vertex()]), and assembled 'mesh3d' objects
+#' ([quad_mesh()], [quad()], [quad_texture()]).
+#'
+#' Texture mapping is the motivating use: an image draped over a mesh
+#' is resampled by the graphics engine, not by the data pipeline, so
+#' mesh density is independent of image resolution and coordinate
+#' transformation is a vertex operation only. Transformation itself
+#' belongs outside this package - the vertex matrix is the interchange.
 #' @keywords internal
 "_PACKAGE"
+
 
 # The following block is used by usethis to automatically manage
 # roxygen namespace tags. Modify with care!
@@ -12,8 +28,12 @@ NULL
 #'
 #' Image of Australia as a map, its extent, and map projection.
 #'
-#' (It's web Mercator, aka 'EPSG:3857'. We've kept the proj string because
-#' it's the easiest to use atm - May 2020.)
+#' This dataset exists to demonstrate the full pattern: write `img` to PNG,
+#' texture it with `[quad_texture()]` using extent, and transform the mesh
+#' vertices with the crs - the image itself is never resampled.
+#'
+#' (The image is web Mercator, aka 'EPSG:3857'. We've kept the proj string because
+#' it's the easiest way to modify a projection.)
 #'
 #' @section Provenance:
 #'
