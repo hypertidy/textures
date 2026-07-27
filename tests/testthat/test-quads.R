@@ -9,9 +9,9 @@ test_that("quad works, basic 1x1 canvas", {
   q0 <- quad()
   expect_equal(q0, quad(c(1L, 1L)))
   expect_equal(q0$vb,
-               structure(c(0, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1), .Dim = c(4L,4L)))
+               structure(c(0, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1), dim = c(4L,4L)))
   expect_equal(q0$ib,
-               structure(c(1L, 2L, 4L, 3L), .Dim = c(4L, 1L)))
+               structure(c(1L, 2L, 4L, 3L), dim = c(4L, 1L)))
 
   expect_equal(q0[-c(1, length(q0))], qmesh_hull)
 
@@ -22,12 +22,12 @@ test_that("quad works, basic 1x1 canvas", {
 
 
   expect_equal(qu$vb,
-               structure(c(0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1), .Dim = c(4L,
+               structure(c(0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1), dim = c(4L,
                                                                                      4L))
               )
 
   expect_equal(qu$ib,
-               structure(1:4, .Dim = c(4L, 1L))
+               structure(1:4, dim = c(4L, 1L))
                )
 
 
@@ -39,7 +39,7 @@ test_that("quad works, basic 1x1 canvas", {
   expect_null(q0$texcoords)
   expect_equal(qt$texcoords, q0$vb[1:2, ])
   expect_false(all(qt$vb == qty$vb))
-  expect_equal(qty$vb, structure(c(0, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0, 1), .Dim = c(4L,
+  expect_equal(qty$vb, structure(c(0, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0, 1), dim = c(4L,
                                                                                      4L)))
 
   expect_equal(quad(2L), quad(c(2L, 2L)))
@@ -53,7 +53,7 @@ vb_5x4 <- structure(c(0, 0, 0, 1, 0.2, 0, 0, 1, 0.4, 0, 0, 1, 0.6, 0, 0,
                         1, 0.8, 0.5, 0, 1, 1, 0.5, 0, 1, 0, 0.75, 0, 1, 0.2, 0.75, 0,
                         1, 0.4, 0.75, 0, 1, 0.6, 0.75, 0, 1, 0.8, 0.75, 0, 1, 1, 0.75,
                         0, 1, 0, 1, 0, 1, 0.2, 1, 0, 1, 0.4, 1, 0, 1, 0.6, 1, 0, 1, 0.8,
-                        1, 0, 1, 1, 1, 0, 1), .Dim = c(4L, 30L))
+                        1, 0, 1, 1, 1, 0, 1), dim = c(4L, 30L))
 ib_5x4 <- structure(c(1L, 2L, 8L, 7L, 2L, 3L, 9L, 8L, 3L, 4L, 10L, 9L, 
 4L, 5L, 11L, 10L, 5L, 6L, 12L, 11L, 7L, 8L, 14L, 13L, 8L, 9L, 
 15L, 14L, 9L, 10L, 16L, 15L, 10L, 11L, 17L, 16L, 11L, 12L, 18L, 
@@ -75,6 +75,6 @@ test_that("quad works, 5x4 canvas", {
 
   ## --- break the mesh: same number of primitives, every vertex expanded
   qu1 <- break_mesh(q1)
-  expect_equal(qu1$ib, structure(1:80, .Dim = c(4L, 20L)))
+  expect_equal(qu1$ib, structure(1:80, dim = c(4L, 20L)))
   expect_equal(qu1$vb, q1$vb[, q1$ib])
 })
