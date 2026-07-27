@@ -1,6 +1,13 @@
 # Changelog
 
+## textures 0.1.1
+
+- Replaced deprecated dot-name arguments in structure() calls (.Dim,
+  .Dimnames, .Names) with standard attribute names, per CRAN check NOTE.
+
 ## textures 0.1.0
+
+CRAN release: 2026-07-21
 
 - Preparing for CRAN release, textures is now the core mesh-generation
   package that quadmesh will import.
