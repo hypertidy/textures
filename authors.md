@@ -2,7 +2,7 @@
 
 ## Authors
 
-- **Michael D. Sumner**. Author, maintainer.
+- **Michael D. Sumner**. Author, maintainer, copyright holder.
   [](https://orcid.org/0000-0002-2471-7511)
 
 ## Citation
