@@ -1,9 +1,4 @@
-## R CMD check results
+## textures 0.1.1
 
-0 errors | 0 warnings | 2 note
+New release to remove CRAN results issues (deprecated .Dim). 
 
-* This is a new release.
-* Spelling of Heckbert and unexpanded is deliberate. 
-
-
-thanks! 

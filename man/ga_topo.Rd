@@ -33,8 +33,7 @@ Copyright Commonwealth of Australia (Geoscience Australia) 2016. Creative
 Commons Attribution 4.0 International Licence.
 
 The image is named 'Australian Topographic Base Map (Web Mercator)' and is
-from the following Geoscience Australia Web Map Tile Service (WMTS):
-\url{https://services.ga.gov.au/gis/rest/services/Topographic_Base_Map/MapServer}.
+from the a Geoscience Australia Web Map Tile Service (WMTS).
 
 Code to obtain the image is in 'data-raw/ga_topo.R' at \url{https://github.com/hypertidy/textures}
 using the wmts package \url{https://github.com/mdsumner/wmts}.
